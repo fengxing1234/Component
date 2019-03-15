@@ -8,6 +8,6 @@ public class PluginNewMainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.plugin_new_activity_main);
+        setContentView(R.layout.news_activity_main);
     }
 }

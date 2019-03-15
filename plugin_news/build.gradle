@@ -5,19 +5,21 @@ if (isModuleRun.toBoolean()) {
 }
 
 android {
-    compileSdkVersion 28
 
+    resourcePrefix "news_"
 
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
         if (isModuleRun.toBoolean()) {
             applicationId "com.component.fx.plugin_news"
         }
 
-        minSdkVersion 16
-        targetSdkVersion 28
-        versionCode 1
-        versionName "1.0"
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
