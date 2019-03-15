@@ -1,0 +1,61 @@
+if (isModuleRun.toBoolean()) {
+    apply plugin: 'com.android.application'
+} else {
+    apply plugin: 'com.android.library'
+}
+
+android {
+    //资源文件隔离 对图片无效 图片需要自己加前缀
+    //不过 resourcePrefix 配置只能限定 res 中 xml 文件中定义的资源，并不能限定图片资源，
+    // 所以我们在往组件中添加图片资源时要手动限制资源前缀。并将多个组件中都会用到的资源放入 Base 模块中。
+    // 这样我们就可以在最大限度上实现组件间资源的隔离。
+    resourcePrefix "login_"
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        if (isModuleRun.toBoolean()) {
+            applicationId "com.component.fx.plugin_login"
+        }
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    sourceSets {
+        main {
+            if (isModuleRun.toBoolean()) {
+                manifest.srcFile 'src/main/module/AndroidManifest.xml'
+            } else {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+            }
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    api project(':plugin_base')
+
+}

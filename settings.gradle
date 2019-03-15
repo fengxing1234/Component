@@ -1,0 +1,1 @@
+include ':app', ':plugin_app', ':plugin_base', ':plugin_login', ':plugin_component', ':plugin_share'

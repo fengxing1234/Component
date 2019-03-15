@@ -1,0 +1,59 @@
+apply plugin: 'com.android.library'
+
+
+android {
+
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+
+        //applicationId "com.component.fx.plugin_base"
+
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode rootProject.ext.versionCode
+        versionName rootProject.ext.versionName
+
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [AROUTER_MODULE_NAME: project.getName()]
+            }
+        }
+
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
+
+    api 'com.android.support.constraint:constraint-layout:1.0.2'
+
+    //就是使用implementation指令的依赖不会传递
+    //完全等同于compile指令，没区别，你将所有的compile改成api，完全没有错。
+    //所以使用 implementation project (':plugin_component') 在plugin_login中不能使用 component 中的类
+    api project(':plugin_component')
+    /**
+     * 所有的组件都依赖 Base 模块，而 componentbase 模块也是所有组件需要依赖的，
+     * 所以我们可以让 Base 模块依赖 componentbase 模块，
+     * 这样在组件中依赖 Base 模块后就可以访问 componentbase 模块中的类。
+     * 前提 请使用api。 implementation有问题 上面说到的问题
+     */
+
+    api 'com.alibaba:arouter-api:1.4.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
+
+}
