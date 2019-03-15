@@ -57,5 +57,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
     api project(':plugin_base')
+    annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
 }

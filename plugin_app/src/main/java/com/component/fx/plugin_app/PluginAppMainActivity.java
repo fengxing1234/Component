@@ -4,9 +4,11 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.component.fx.plugin_component.ServiceFactory;
 
+@Route(path = "/plugin_app/main")
 public class PluginAppMainActivity extends AppCompatActivity {
 
     private static final String TAG = PluginAppMainActivity.class.getSimpleName();

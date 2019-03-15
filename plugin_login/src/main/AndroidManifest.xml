@@ -3,7 +3,7 @@
     package="com.component.fx.plugin_login">
 
     <application>
-        <activity android:name=".PluginLoginMainActivity" />
+        <activity android:name=".PluginLoginMainActivity" android:theme="@style/Swipe_Back_AppTheme"/>
     </application>
 
 </manifest>

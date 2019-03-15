@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<com.component.fx.plugin_base.swipeback.ui.SwipeBackLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/swipe_back"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+</com.component.fx.plugin_base.swipeback.ui.SwipeBackLayout>
