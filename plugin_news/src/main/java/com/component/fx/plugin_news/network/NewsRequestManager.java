@@ -14,7 +14,7 @@ import retrofit2.Retrofit;
  */
 public class NewsRequestManager {
 
-    private static final String NEWS_KEY = "aad6635d30611d3899be0cefe1a4efb3FX";
+    private static final String NEWS_KEY = "aad6635d30611d3899be0cefe1a4efb3";
 
     public static final String TOP = "top";
 
