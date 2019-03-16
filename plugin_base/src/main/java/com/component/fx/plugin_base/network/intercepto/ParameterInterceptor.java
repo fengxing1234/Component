@@ -34,13 +34,16 @@ public class ParameterInterceptor implements Interceptor {
                 .newBuilder()
                 .scheme(oldRequest.url().scheme())
                 .host(oldRequest.url().host())
-                .addQueryParameter("key","aad6635d30611d3899be0cefe1a4efb3")
+                .addQueryParameter("key", "aad6635d30611d3899be0cefe1a4efb3")
                 //.addQueryParameter("parameter", "")
                 //.addQueryParameter("parameter", "")
                 ;
 
         Request request = oldRequest.newBuilder()
                 .method(oldRequest.method(), oldRequest.body())
+                .addHeader("header1", "header1")
+                .addHeader("header2", "header2")
+                .addHeader("header3", "header3")
                 .url(builder.build())
                 .build();
 
