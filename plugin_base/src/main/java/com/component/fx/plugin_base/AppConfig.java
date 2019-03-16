@@ -7,6 +7,7 @@ public class AppConfig {
 
     //服务器地址
     public static final String BASE_URL = "";
+    public static final String BASE_URL_NEWS = "https://v.juhe.cn/";
 
     public static String[] moduleApps = {
             LoginApp, ShareApp

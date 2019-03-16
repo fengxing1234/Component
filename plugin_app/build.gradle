@@ -55,8 +55,10 @@ dependencies {
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
     //代码隔离 plugin_app 在开发时期 不能直接调用 login share 的代码 面向接口编程
-    runtimeOnly project(':plugin_login')
-    runtimeOnly project(':plugin_share')
+    if(!isModuleRun.toBoolean()){
+        runtimeOnly project(':plugin_login')
+        runtimeOnly project(':plugin_share')
+    }
 
     api project(':plugin_base')
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'

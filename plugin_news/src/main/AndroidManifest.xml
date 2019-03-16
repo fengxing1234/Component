@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.component.fx.plugin_news">
 
-    <application>
+    <application android:name=".NewsApplication">
 
     </application>
 
