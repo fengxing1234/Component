@@ -21,6 +21,9 @@ import java.util.List;
 
 public class NewsRecycleAdapter extends RecyclerView.Adapter {
 
+
+    private int mLoadMoreStatus;
+
     public interface OnNewsItemClickListener {
 
         void onNewsItemClick(View v, NewsViewHolder holder, int layoutPosition, NewsModel.DataBean dataBean);
@@ -36,6 +39,9 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
     private List<NewsModel.DataBean> mNewsList;
     private OnNewsItemClickListener onNewsItemClickListener;
     private OnNewsItemLongClickListener onNewsItemLongClickListener;
+
+    public static final int NO_MORE_NEWS = 0x001;
+
     //正常
     private static final int ItemViewTypeNormal = 1;
     //只有一张图片时
@@ -72,6 +78,12 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
         return mNewsList;
     }
 
+    public void setMoreState(int noMoreNews) {
+        this.mLoadMoreStatus = noMoreNews;
+        Log.d("fengxing", "setMoreState: " + mLoadMoreStatus);
+        notifyItemChanged(mNewsList.size());
+    }
+
     public void setOnNewsItemClickListener(OnNewsItemClickListener listener) {
         onNewsItemClickListener = listener;
     }
@@ -92,7 +104,7 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    onNewsItemClickListener.onNewsItemClick(v, holder, holder.getLayoutPosition(), mNewsList.get(holder.getLayoutPosition()));
+                    onNewsItemClickListener.onNewsItemClick(v, holder, holder.getLayoutPosition(), mNewsList.get(holder.getLayoutPosition() - 1));
                 }
             });
 
@@ -138,10 +150,11 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_foot_view_item, viewGroup, false);
                 break;
         }
-
         //view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_layout_news_item, viewGroup, false);
         NewsViewHolder newsViewHolder = new NewsViewHolder(view);
-        bindItemClick(newsViewHolder);
+        if (i != ItemViewTypeFoot) {
+            bindItemClick(newsViewHolder);
+        }
         return newsViewHolder;
     }
 
@@ -150,7 +163,13 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
         int itemViewType = getItemViewType(i);
         if (itemViewType == ItemViewTypeFoot) {
-            //((TextView) ((NewsViewHolder) viewHolder).getView(R.id.new_foot_tips)).setText("");
+            NewsViewHolder holder = (NewsViewHolder) viewHolder;
+            if (mLoadMoreStatus == NO_MORE_NEWS) {
+                ((TextView) holder.getView(R.id.new_foot_tips)).setText("没有更多数据");
+                holder.getView(R.id.new_progress_bar).setVisibility(View.GONE);
+            }
+
+
         } else if (itemViewType == ItemViewTypeNormal || itemViewType == ItemViewTypeSimple) {
             bindViewByType(viewHolder, i);
         }

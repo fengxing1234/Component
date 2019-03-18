@@ -71,11 +71,12 @@ public class NewsFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onViewCreated: " + mNewsType);
         initRecycleView(view);
+        initRefreshLayout(view);
+        getNewsModel(REFRESH_TYPE);
     }
 
     private void initRecycleView(@NonNull View view) {
         mRecycleView = (RecyclerView) view.findViewById(R.id.news_recycle_view);
-        initRefreshLayout(view);
         linearLayoutManager = new LinearLayoutManager(getContext());
         mRecycleView.setLayoutManager(linearLayoutManager);
         newsAdapter = new NewsRecycleAdapter(this);
@@ -176,7 +177,6 @@ public class NewsFragment extends Fragment {
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: " + mNewsType);
-        getNewsModel(REFRESH_TYPE);
     }
 
     private void getNewsModel(final int type) {
@@ -227,7 +227,8 @@ public class NewsFragment extends Fragment {
                 Gson gson = new Gson();
                 NewsModel newsModel = gson.fromJson(str, NewsModel.class);
                 if (type == MORE_TYPE) {
-                    newsAdapter.addMoreNews(newsModel);
+                    //newsAdapter.addMoreNews(newsModel);
+                    newsAdapter.setMoreState(NewsRecycleAdapter.NO_MORE_NEWS);
                 } else {
                     newsAdapter.addNewList(newsModel);
                 }
