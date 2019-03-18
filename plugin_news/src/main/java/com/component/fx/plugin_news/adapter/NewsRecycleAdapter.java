@@ -55,7 +55,9 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
     }
 
     public void addNewList(NewsModel newsModel) {
-
+        mNewsList.addAll(0, newsModel.getData());
+        notifyDataSetChanged();
+        notifyItemRangeInserted(0, newsModel.getData().size());
     }
 
     public List<NewsModel.DataBean> getNewsModel() {
