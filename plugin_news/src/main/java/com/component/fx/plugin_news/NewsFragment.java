@@ -36,6 +36,10 @@ public class NewsFragment extends Fragment {
     private RecyclerView mRecycleView;
     private NewsRecycleAdapter newsAdapter;
     private SwipeRefreshLayout refreshLayout;
+    private LinearLayoutManager linearLayoutManager;
+
+    private static final int REFRESH_TYPE = 0x0001;
+    private static final int MORE_TYPE = 0x0002;
 
     public static NewsFragment getInstance(String type) {
         NewsFragment newsFragment = new NewsFragment();
@@ -66,9 +70,14 @@ public class NewsFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onViewCreated: " + mNewsType);
+        initRecycleView(view);
+    }
+
+    private void initRecycleView(@NonNull View view) {
         mRecycleView = (RecyclerView) view.findViewById(R.id.news_recycle_view);
         initRefreshLayout(view);
-        mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
+        linearLayoutManager = new LinearLayoutManager(getContext());
+        mRecycleView.setLayoutManager(linearLayoutManager);
         newsAdapter = new NewsRecycleAdapter(this);
         mRecycleView.setAdapter(newsAdapter);
         newsAdapter.setOnNewsItemClickListener(new NewsRecycleAdapter.OnNewsItemClickListener() {
@@ -77,6 +86,39 @@ public class NewsFragment extends Fragment {
                 WebViewActivity.startWebViewActivity(getContext(), dataBean.getUrl());
             }
         });
+
+        mRecycleView.addOnScrollListener(new RecyclerView.OnScrollListener() {
+
+            private int lastVisibleItemPosition;
+
+            @Override
+            public void onScrollStateChanged(@NonNull RecyclerView recyclerView, int newState) {
+                super.onScrollStateChanged(recyclerView, newState);
+                if (newState == RecyclerView.SCROLL_STATE_IDLE && lastVisibleItemPosition + 1 == newsAdapter.getItemCount() && newsAdapter.getItemCount() > 5) {
+                    getNewsModel(MORE_TYPE);
+                }
+            }
+
+            @Override
+            public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
+                super.onScrolled(recyclerView, dx, dy);
+                lastVisibleItemPosition = linearLayoutManager.findLastVisibleItemPosition();
+            }
+        });
+
+    }
+
+    private void initRefreshLayout(@NonNull View view) {
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.news_swipe_refresh);
+        // 设置下拉出现小圆圈是否是缩放出现，出现的位置，最大的下拉位置
+        //refreshLayout.setProgressViewOffset(true, 50, 200);
+        // 设置下拉圆圈的大小，两个值 LARGE， DEFAULT
+        refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
+        refreshLayout.setColorSchemeResources(
+                android.R.color.holo_blue_bright,
+                android.R.color.holo_green_light,
+                android.R.color.holo_orange_light,
+                android.R.color.holo_red_light);
         refreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
@@ -130,30 +172,25 @@ public class NewsFragment extends Fragment {
         refreshLayout.setRefreshing(false);
     }
 
-    private void initRefreshLayout(@NonNull View view) {
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.news_swipe_refresh);
-        // 设置下拉出现小圆圈是否是缩放出现，出现的位置，最大的下拉位置
-        //refreshLayout.setProgressViewOffset(true, 50, 200);
-        // 设置下拉圆圈的大小，两个值 LARGE， DEFAULT
-        refreshLayout.setSize(SwipeRefreshLayout.DEFAULT);
-        refreshLayout.setColorSchemeResources(
-                android.R.color.holo_blue_bright,
-                android.R.color.holo_green_light,
-                android.R.color.holo_orange_light,
-                android.R.color.holo_red_light);
-
-    }
-
     @Override
     public void onResume() {
         super.onResume();
         Log.d(TAG, "onResume: " + mNewsType);
+        getNewsModel(REFRESH_TYPE);
+    }
+
+    private void getNewsModel(final int type) {
         NewsRequestManager.getNewsData(NewsEnum.getEnumByName(mNewsType), new Callback<NewsModel>() {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
                 String name = Thread.currentThread().getName();
                 ToastUtil.toast(mNewsType + "数据请求成功" + "线程=" + name);
-                newsAdapter.setNewsModel(response.body());
+                if (type == MORE_TYPE) {
+                    newsAdapter.addMoreNews(response.body());
+                } else {
+                    newsAdapter.addNewList(response.body());
+                }
+
             }
 
             @Override
@@ -189,9 +226,11 @@ public class NewsFragment extends Fragment {
 
                 Gson gson = new Gson();
                 NewsModel newsModel = gson.fromJson(str, NewsModel.class);
-                newsAdapter.setNewsModel(newsModel);
-                String name = Thread.currentThread().getName();
-                ToastUtil.toast(t.getMessage() + "  线程:" + name);
+                if (type == MORE_TYPE) {
+                    newsAdapter.addMoreNews(newsModel);
+                } else {
+                    newsAdapter.addNewList(newsModel);
+                }
             }
         });
     }

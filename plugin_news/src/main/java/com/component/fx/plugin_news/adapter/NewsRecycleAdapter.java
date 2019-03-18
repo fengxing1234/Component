@@ -41,6 +41,8 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
     //只有一张图片时
     private static final int ItemViewTypeSimple = 2;
 
+    private static final int ItemViewTypeFoot = 3;
+
 
     public NewsRecycleAdapter(Fragment context) {
         this.mFragment = context;
@@ -57,7 +59,13 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
     public void addNewList(NewsModel newsModel) {
         mNewsList.addAll(0, newsModel.getData());
         notifyDataSetChanged();
-        notifyItemRangeInserted(0, newsModel.getData().size());
+        //notifyItemRangeInserted(0, newsModel.getData().size());
+    }
+
+    public void addMoreNews(NewsModel body) {
+        int size = mNewsList.size();
+        mNewsList.addAll(size, body.getData());
+        notifyItemRangeInserted(size, body.getData().size());
     }
 
     public List<NewsModel.DataBean> getNewsModel() {
@@ -103,6 +111,9 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
+        if (position == mNewsList.size()) {
+            return ItemViewTypeFoot;
+        }
         NewsModel.DataBean dataBean = mNewsList.get(position);
         String thumbnail_pic_s02 = dataBean.getThumbnail_pic_s02();
         String thumbnail_pic_s03 = dataBean.getThumbnail_pic_s03();
@@ -123,6 +134,9 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
             case ItemViewTypeSimple:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_layout_simple_news_item, viewGroup, false);
                 break;
+            case ItemViewTypeFoot:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_foot_view_item, viewGroup, false);
+                break;
         }
 
         //view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_layout_news_item, viewGroup, false);
@@ -134,7 +148,13 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-        bindViewByType(viewHolder, i);
+        int itemViewType = getItemViewType(i);
+        if (itemViewType == ItemViewTypeFoot) {
+            //((TextView) ((NewsViewHolder) viewHolder).getView(R.id.new_foot_tips)).setText("");
+        } else if (itemViewType == ItemViewTypeNormal || itemViewType == ItemViewTypeSimple) {
+            bindViewByType(viewHolder, i);
+        }
+
 
     }
 
@@ -164,7 +184,11 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mNewsList.size();
+        if (mNewsList.size() < 5) {
+            return mNewsList.size();
+        }
+        //添加一个尾布局
+        return mNewsList.size() + 1;
     }
 
 
