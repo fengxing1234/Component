@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!--4.4版本以上 使用-->
+    <style name="Base_No_Title.Status">
+
+        <!--window 窗口透明-->
+        <item name="android:windowIsTranslucent">true</item>
+
+        <!--窗口的状态栏半透明  针对Android 4.4-->
+        <item name="android:windowTranslucentStatus">true</item>
+
+        <!--解决 内容区域延伸到状态栏-->
+        <item name="android:fitsSystemWindows">true</item>
+
+    </style>
+
+</resources>

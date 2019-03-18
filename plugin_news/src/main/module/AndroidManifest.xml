@@ -10,7 +10,7 @@
         android:roundIcon="@mipmap/news_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/news_AppTheme">
-        <activity android:name=".PluginNewMainActivity" android:theme="@style/Base_No_Title">
+        <activity android:name=".PluginNewMainActivity" android:theme="@style/Base_No_Title.Translucent">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

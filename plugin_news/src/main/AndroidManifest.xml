@@ -4,6 +4,10 @@
 
     <application android:name=".NewsApplication">
 
+        <activity
+            android:name=".PluginNewMainActivity"
+            android:theme="@style/Base_No_Title.Translucent" />
+        
     </application>
 
 </manifest>
