@@ -8,55 +8,31 @@
         android:id="@+id/news_tv_title"
         style="@style/Base_Text_Style_Black"
         android:layout_width="0dp"
-        android:layout_height="wrap_content"
+        android:layout_height="0dp"
         android:layout_marginLeft="@dimen/base_margin_left"
         android:layout_marginRight="@dimen/base_margin_right"
-        android:layout_marginTop="@dimen/base_margin_top_4"
-        android:padding="4dp"
-        android:text="中国银联回应 315 曝光闪付问题：隔空盗刷是极少数个案"
+        app:layout_constraintBottom_toBottomOf="@id/news_iv_thumbnail_1"
         app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintRight_toLeftOf="@id/news_iv_thumbnail_1"
+        app:layout_constraintTop_toTopOf="@id/news_iv_thumbnail_1" />
 
     <ImageView
         android:id="@+id/news_iv_thumbnail_1"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        app:layout_constraintLeft_toLeftOf="@id/news_tv_title"
-        app:layout_constraintRight_toLeftOf="@id/news_iv_thumbnail_2"
-        app:layout_constraintTop_toBottomOf="@id/news_tv_title" />
+        android:layout_marginRight="@dimen/base_margin_right"
+        android:layout_marginTop="@dimen/base_margin_top_8"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/news_iv_thumbnail_2"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        app:layout_constraintBottom_toBottomOf="@id/news_iv_thumbnail_1"
-        app:layout_constraintLeft_toRightOf="@id/news_iv_thumbnail_1"
-        app:layout_constraintRight_toLeftOf="@id/news_iv_thumbnail_3"
-        app:layout_constraintTop_toBottomOf="@id/news_tv_title"
-        app:layout_constraintTop_toTopOf="@id/news_iv_thumbnail_1" />
-
-    <ImageView
-        android:id="@+id/news_iv_thumbnail_3"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="2dp"
-        app:layout_constraintBottom_toBottomOf="@id/news_iv_thumbnail_1"
-        app:layout_constraintLeft_toRightOf="@id/news_iv_thumbnail_2"
-        app:layout_constraintRight_toRightOf="@id/news_tv_title"
-        app:layout_constraintTop_toBottomOf="@id/news_tv_title"
-        app:layout_constraintTop_toTopOf="@id/news_iv_thumbnail_1" />
 
     <TextView
         android:id="@+id/news_tv_author_name"
         style="@style/Base_Text_Style_Small"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="@dimen/base_margin_left"
         android:layout_marginTop="@dimen/base_margin_top_4"
-        app:layout_constraintLeft_toLeftOf="parent"
+        app:layout_constraintLeft_toLeftOf="@id/news_tv_title"
         app:layout_constraintTop_toBottomOf="@id/news_iv_thumbnail_1" />
 
     <TextView
