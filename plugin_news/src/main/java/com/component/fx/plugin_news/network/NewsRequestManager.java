@@ -26,10 +26,10 @@ public class NewsRequestManager {
 //        call.enqueue(callback);
 //    }
 
-    public static void getNewsData(@NewsType String type, @NonNull Callback<NewsModel> callback) {
+    public static void getNewsData(NewsEnum type, @NonNull Callback<NewsModel> callback) {
         Retrofit retrofit = BaseRequestRetrofit.getNewsRetrofit();
         NewsRequestService newsRequestService = retrofit.create(NewsRequestService.class);
-        Call<NewsModel> call = newsRequestService.getNews(type, NEWS_KEY);
+        Call<NewsModel> call = newsRequestService.getNews(type.getType(), NEWS_KEY);
         call.enqueue(callback);
     }
 

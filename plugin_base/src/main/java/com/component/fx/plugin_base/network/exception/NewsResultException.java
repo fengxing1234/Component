@@ -13,4 +13,16 @@ public class NewsResultException extends RuntimeException {
         this.reason = reason;
         this.resultcode = resultCode;
     }
+
+    public int getError_code() {
+        return error_code;
+    }
+
+    public String getReason() {
+        return reason;
+    }
+
+    public String getResultcode() {
+        return resultcode;
+    }
 }

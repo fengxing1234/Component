@@ -31,5 +31,5 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    api 'com.android.support:appcompat-v7:28.+'
+    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
 }

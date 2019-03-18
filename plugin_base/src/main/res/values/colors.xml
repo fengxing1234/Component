@@ -1,6 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="share_colorPrimary">#3F51B5</color>
-    <color name="share_colorPrimaryDark">#303F9F</color>
-    <color name="share_colorAccent">#FF4081</color>
+    <color name="base_colorPrimary">#3F51B5</color>
+    <color name="base_colorPrimaryDark">#303F9F</color>
+    <color name="base_colorAccent">#FF4081</color>
+
+    <color name="base_text_color_111">#111111</color>
+    <color name="base_text_color_black">#333333</color>
+    <color name="base_text_color_normal">#666666</color>
+
+    <color name="base_divider_color">#cccccc</color>
 </resources>

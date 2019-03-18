@@ -4,16 +4,15 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class NewsCallBack<T> implements Callback<Response<T>> {
-
+public class NewsCallBack<T> implements Callback<T> {
 
     @Override
-    public void onResponse(Call<Response<T>> call, Response<Response<T>> response) {
+    public void onResponse(Call<T> call, Response<T> response) {
 
     }
 
     @Override
-    public void onFailure(Call<Response<T>> call, Throwable t) {
+    public void onFailure(Call<T> call, Throwable t) {
 
     }
 }
