@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.component.fx.plugin_base.WebViewActivity;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_news.adapter.NewsRecycleAdapter;
 import com.component.fx.plugin_news.network.NewsEnum;
@@ -59,6 +60,12 @@ public class NewsFragment extends Fragment {
         mRecycleView.setLayoutManager(new LinearLayoutManager(getContext()));
         newsAdapter = new NewsRecycleAdapter(this);
         mRecycleView.setAdapter(newsAdapter);
+        newsAdapter.setOnNewsItemClickListener(new NewsRecycleAdapter.OnNewsItemClickListener() {
+            @Override
+            public void onNewsItemClick(View v, NewsRecycleAdapter.NewsViewHolder holder, int layoutPosition, NewsModel.DataBean dataBean) {
+                WebViewActivity.startWebViewActivity(getContext(), dataBean.getUrl());
+            }
+        });
     }
 
     @Override
@@ -67,7 +74,7 @@ public class NewsFragment extends Fragment {
         NewsRequestManager.getNewsData(NewsEnum.getEnumByName(mNewsType), new Callback<NewsModel>() {
             @Override
             public void onResponse(Call<NewsModel> call, Response<NewsModel> response) {
-                ToastUtil.toast(mNewsType+"数据请求成功");
+                ToastUtil.toast(mNewsType + "数据请求成功");
                 newsAdapter.setNewsModel(response.body());
                 newsAdapter.notifyDataSetChanged();
             }

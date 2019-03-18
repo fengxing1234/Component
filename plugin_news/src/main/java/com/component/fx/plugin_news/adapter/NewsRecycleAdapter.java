@@ -20,8 +20,21 @@ import java.util.List;
 
 public class NewsRecycleAdapter extends RecyclerView.Adapter {
 
+    public interface OnNewsItemClickListener {
+
+        void onNewsItemClick(View v, NewsViewHolder holder, int layoutPosition, NewsModel.DataBean dataBean);
+    }
+
+    public interface OnNewsItemLongClickListener {
+
+        boolean onNewsItemLongClick(View v, NewsViewHolder holder, int layoutPosition, NewsModel.DataBean dataBean);
+    }
+
+
     private Fragment mFragment;
     private List<NewsModel.DataBean> mNewsList;
+    private OnNewsItemClickListener onNewsItemClickListener;
+    private OnNewsItemLongClickListener onNewsItemLongClickListener;
 
     public NewsRecycleAdapter(Fragment context) {
         this.mFragment = context;
@@ -42,11 +55,50 @@ public class NewsRecycleAdapter extends RecyclerView.Adapter {
         return mNewsList;
     }
 
+    public void setOnNewsItemClickListener(OnNewsItemClickListener listener) {
+        onNewsItemClickListener = listener;
+    }
+
+    public void setOnNewsItemLongClickListener(OnNewsItemLongClickListener listener) {
+        onNewsItemLongClickListener = listener;
+    }
+
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int i) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.news_layout_news_item, viewGroup, false);
-        return new NewsViewHolder(view);
+        NewsViewHolder newsViewHolder = new NewsViewHolder(view);
+        bindItemClick(newsViewHolder);
+        return newsViewHolder;
+    }
+
+    private void bindItemClick(final NewsViewHolder holder) {
+        if (holder == null) {
+            return;
+        }
+        View itemView = holder.mItemView;
+        if (itemView == null) {
+            return;
+        }
+        if (onNewsItemClickListener != null) {
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    onNewsItemClickListener.onNewsItemClick(v,holder, holder.getLayoutPosition(), mNewsList.get(holder.getLayoutPosition()));
+                }
+            });
+
+        }
+
+        if (onNewsItemLongClickListener != null) {
+            itemView.setOnLongClickListener(new View.OnLongClickListener() {
+                @Override
+                public boolean onLongClick(View v) {
+                    return onNewsItemLongClickListener.onNewsItemLongClick(v,holder, holder.getLayoutPosition(), mNewsList.get(holder.getLayoutPosition()));
+                }
+            });
+        }
+
     }
 
     @Override

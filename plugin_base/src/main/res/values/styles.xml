@@ -16,8 +16,14 @@
         <item name="windowNoTitle">true</item>
     </style>
 
+
+    <!--透明窗口-->
     <style name="Swipe_Back_AppTheme" parent="Base_Theme">
-        <!--透明窗口-->
+
+        <item name="android:windowIsTranslucent">true</item>
+    </style>
+
+    <style name="Base_No_Title.Translucent" parent="Base_No_Title">
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
