@@ -19,6 +19,7 @@ public class SwipeBackActivity extends AppCompatActivity implements SwipeBackAct
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        TranslucentUtils.convertActivityToTranslucent(this);
         mSwipeBackHelper = new SwipeBackActivityHelper(this);
         mSwipeBackHelper.onActivityCreate();
     }

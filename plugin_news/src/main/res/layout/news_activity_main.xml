@@ -4,17 +4,18 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/base_white"
     android:orientation="vertical"
     tools:context=".PluginNewMainActivity">
 
     <android.support.design.widget.TabLayout
         android:id="@+id/news_tab_layout"
         android:layout_width="match_parent"
+        android:layout_height="36dp"
+        app:tabIndicatorHeight="0dp"
         app:tabMinWidth="48dp"
         app:tabMode="scrollable"
-        app:tabIndicatorHeight="0dp"
-        app:tabSelectedTextColor="@color/base_colorPrimary"
-        android:layout_height="36dp">
+        app:tabSelectedTextColor="@color/base_colorPrimary">
 
     </android.support.design.widget.TabLayout>
 

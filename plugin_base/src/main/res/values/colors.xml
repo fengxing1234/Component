@@ -8,5 +8,8 @@
     <color name="base_text_color_black">#333333</color>
     <color name="base_text_color_normal">#666666</color>
 
+    <color name="base_white">#ffffff</color>
+    <color name="base_black">#000000</color>
+
     <color name="base_divider_color">#cccccc</color>
 </resources>

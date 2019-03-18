@@ -264,8 +264,12 @@ public class SwipeBackLayout extends FrameLayout {
 
     @Override
     public void requestLayout() {
-        if (!mInLayout) {
+        if(!mEnable){
             super.requestLayout();
+        }else{
+            if (!mInLayout) {
+                super.requestLayout();
+            }
         }
 
     }
