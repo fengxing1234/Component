@@ -58,6 +58,7 @@ dependencies {
     if(!isModuleRun.toBoolean()){
         runtimeOnly project(':plugin_login')
         runtimeOnly project(':plugin_share')
+        runtimeOnly project(':plugin_news')
     }
 
     api project(':plugin_base')

@@ -2,12 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.component.fx.plugin_news">
 
-    <application android:name=".NewsApplication">
+    <application>
 
         <activity
             android:name=".PluginNewMainActivity"
             android:theme="@style/Base_No_Title.Translucent" />
-        
+
     </application>
 
 </manifest>

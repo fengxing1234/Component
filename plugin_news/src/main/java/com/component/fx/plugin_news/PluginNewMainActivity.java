@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
 import com.component.fx.plugin_base.BaseActivity;
 import com.component.fx.plugin_news.adapter.NewsFragmentPageAdapter;
 import com.component.fx.plugin_news.network.NewsEnum;
@@ -11,6 +12,7 @@ import com.component.fx.plugin_news.network.NewsEnum;
 import java.util.ArrayList;
 import java.util.List;
 
+@Route(path = "/plugin_news/news")
 public class PluginNewMainActivity extends BaseActivity {
 
     private static final String TAG = PluginNewMainActivity.class.getSimpleName();

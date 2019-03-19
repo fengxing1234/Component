@@ -22,6 +22,6 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void jump() {
-        ARouter.getInstance().build("/plugin_app/main").navigation();
+        ARouter.getInstance().build("/plugin_news/news").navigation();
     }
 }
