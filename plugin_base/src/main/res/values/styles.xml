@@ -27,6 +27,15 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+    <!--头条样式-->
+    <style name="Base_DayNight_Theme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+    </style>
+
+
 
     <style name="SwipeBackLayout">
         <item name="edge_size">50dp</item>
