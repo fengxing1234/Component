@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group>
+        <item
+            android:id="@+id/project_home"
+            android:checkable="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="项目主页" />
+
+        <item
+            android:id="@+id/project_id"
+            android:checkable="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="项目地址" />
+
+        <item
+            android:id="@+id/project_shared"
+            android:checkable="true"
+            android:icon="@mipmap/ic_launcher"
+            android:title="分享项目" />
+    </group>
+
+    <item
+        android:id="@+id/choose"
+        android:icon="@mipmap/ic_launcher"
+        android:title="选项">
+        <menu>
+            <item
+                android:id="@+id/item_model"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="夜间模式" />
+
+            <item
+                android:id="@+id/more"
+                android:checkable="true"
+                android:icon="@mipmap/ic_launcher"
+                android:title="更多" />
+        </menu>
+    </item>
+</menu>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:title="搜索"
+        android:id="@+id/app_bar_search"
+        app:showAsAction="always"
+        app:actionViewClass="android.support.v7.widget.SearchView">
+
+    </item>
+    <item
+        android:id="@+id/one"
+        android:icon="@mipmap/ic_launcher"
+        android:title="无聊" />
+
+    <item
+        android:id="@+id/two"
+        android:icon="@mipmap/ic_launcher"
+        android:title="无聊" />
+
+    <item
+        android:id="@+id/three"
+        android:icon="@mipmap/ic_launcher"
+        android:title="无聊" />
+
+    <item
+        android:id="@+id/choose"
+        android:icon="@mipmap/ic_launcher"
+        android:title="选项">
+        <menu>
+            <item
+                android:id="@+id/item_model"
+                android:icon="@mipmap/ic_launcher"
+                android:title="夜间模式" />
+
+            <item
+                android:id="@+id/more"
+                android:icon="@mipmap/ic_launcher"
+                android:title="更多" />
+        </menu>
+    </item>
+
+</menu>

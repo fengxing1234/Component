@@ -35,6 +35,11 @@
         <item name="android:textColorPrimary">@color/textColorPrimary</item>
     </style>
 
+    <style name="Base_DayNight_Theme.No_Title">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
 
 
     <style name="SwipeBackLayout">
