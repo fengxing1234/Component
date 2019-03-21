@@ -4,12 +4,12 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/toutiao_ic_launcher"
+        android:icon="@drawable/toutiao_ic_title"
         android:label="@string/toutiao_app_name"
         android:name=".TouTiaoApplication"
         android:roundIcon="@mipmap/toutiao_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Base_DayNight_Theme">
+        android:theme="@style/Base_DayNight_Theme.No_Title">
         <activity android:name=".PluginTouTiaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
