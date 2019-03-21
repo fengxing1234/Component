@@ -24,9 +24,7 @@
             android:layout_gravity="bottom"
             android:background="@color/viewBackground"
             app:elevation="16dp"
-            app:layout_behavior="com.component.fx.plugin_toutiao.behavior.NeetBottomNavViewBehavior"
-            app:itemIconTint="@drawable/toutiao_botton_nav_test_select"
-            app:itemTextColor="@drawable/toutiao_botton_nav_test_select"
+            app:layout_behavior="com.component.fx.plugin_toutiao.behavior.SmoothBottomNavViewBehavior"
             app:menu="@menu/toutiao_main_bottom_menu">
 
         </android.support.design.widget.BottomNavigationView>
