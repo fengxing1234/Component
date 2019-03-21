@@ -22,7 +22,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"
-            android:background="@color/viewBackground"
+            android:background="@color/toutiao_viewBackground"
             app:elevation="16dp"
             app:layout_behavior="com.component.fx.plugin_toutiao.behavior.SmoothBottomNavViewBehavior"
             app:menu="@menu/toutiao_main_bottom_menu">

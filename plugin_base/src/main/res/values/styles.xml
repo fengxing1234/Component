@@ -29,10 +29,10 @@
 
     <!--头条样式-->
     <style name="Base_DayNight_Theme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
-        <item name="android:textColorPrimary">@color/textColorPrimary</item>
+        <item name="colorPrimary">@color/toutiao_colorPrimary</item>
+        <item name="colorPrimaryDark">@color/toutiao_colorPrimaryDark</item>
+        <item name="colorAccent">@color/toutiao_colorAccent</item>
+        <item name="android:textColorPrimary">@color/toutiao_textColorPrimary</item>
     </style>
 
     <style name="Base_DayNight_Theme.No_Title">

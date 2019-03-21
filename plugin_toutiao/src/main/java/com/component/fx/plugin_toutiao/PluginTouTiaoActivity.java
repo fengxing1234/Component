@@ -197,7 +197,7 @@ public class PluginTouTiaoActivity extends AppCompatActivity {
                         break;
                 }
 
-                return false;
+                return true;
             }
         });
 

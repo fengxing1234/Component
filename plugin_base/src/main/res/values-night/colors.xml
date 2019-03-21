@@ -3,10 +3,10 @@
 
     <!--夜间模式的主题-->
 
-    <color name="colorPrimary">#35464e</color>
-    <color name="colorPrimaryDark">#212a2f</color>
-    <color name="colorAccent">#212a2f</color>
-    <color name="textColorPrimary">#616161</color>
-    <color name="viewBackground">#212a2f</color>
-    <color name="line_divider">@color/Grey700</color>
+    <color name="toutiao_colorPrimary">#35464e</color>
+    <color name="toutiao_colorPrimaryDark">#212a2f</color>
+    <color name="toutiao_colorAccent">#212a2f</color>
+    <color name="toutiao_textColorPrimary">#616161</color>
+    <color name="toutiao_viewBackground">#212a2f</color>
+    <color name="toutiao_line_divider">@color/Grey700</color>
 </resources>
