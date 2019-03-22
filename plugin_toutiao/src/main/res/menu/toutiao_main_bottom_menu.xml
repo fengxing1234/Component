@@ -6,6 +6,7 @@
         android:id="@+id/toutiao_menu_action_news"
         android:icon="@drawable/toutiao_menu_bottom_news_icon"
         android:title="新闻"
+        android:enabled="true"
         app:showAsAction="ifRoom" />
 
     <item

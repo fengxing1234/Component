@@ -27,20 +27,59 @@
         <item name="android:windowIsTranslucent">true</item>
     </style>
 
+
     <!--头条样式-->
-    <style name="Base_DayNight_Theme" parent="Theme.AppCompat.DayNight.DarkActionBar">
-        <item name="colorPrimary">@color/toutiao_colorPrimary</item>
-        <item name="colorPrimaryDark">@color/toutiao_colorPrimaryDark</item>
-        <item name="colorAccent">@color/toutiao_colorAccent</item>
-        <item name="android:textColorPrimary">@color/toutiao_textColorPrimary</item>
+    <style name="TouTiao_Base_Theme" parent="Theme.AppCompat.DayNight.DarkActionBar">
+
     </style>
 
-    <style name="Base_DayNight_Theme.No_Title">
+    <!--头条 取消ActionBar-->
+    <style name="TouTiao_Base_Theme.NoActionBar">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
     </style>
 
+    <!--头条 黑天 模式-->
+    <style name="TouTiao_Night_Theme" parent="TouTiao_Base_Theme.NoActionBar">
 
+        <item name="colorPrimary">@color/toutiao_colorPrimary_night</item>
+        <item name="colorPrimaryDark">@color/toutiao_colorPrimaryDark_night</item>
+        <item name="colorAccent">@color/toutiao_colorAccent_night</item>
+        <item name="android:textColorPrimary">@color/toutiao_textColorPrimary_night</item>
+        <item name="android:windowBackground">@color/toutiao_viewBackground_night</item>
+    </style>
+
+    <!--头条 白天 模式-->
+    <style name="TouTiao_DayTheme" parent="TouTiao_Base_Theme.NoActionBar">
+        <!--toolbar 背景颜色 -->
+        <item name="colorPrimary">@color/toutiao_colorPrimary</item>
+        <!--状态栏的背景颜色-->
+        <item name="colorPrimaryDark">@color/toutiao_colorPrimaryDark</item>
+
+        <item name="colorAccent">@color/toutiao_colorAccent</item>
+        <!--toolbar 字体颜色-->
+        <item name="android:textColorPrimary">@color/toutiao_textColorPrimary</item>
+        <!--窗口背景-->
+        <item name="android:windowBackground">@color/toutiao_viewBackground</item>
+    </style>
+
+    <style name="TouTiao_Base_Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
+
+    </style>
+
+
+    <style name="TouTiao_TabLayout" parent="Base.Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">#FFFFFF</item>
+        <item name="tabIndicatorHeight">2dp</item>
+        <item name="tabPaddingStart">12dp</item>
+        <item name="tabPaddingEnd">12dp</item>
+        <item name="tabBackground">@color/toutiao_colorPrimary</item>
+        <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
+        <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+
+
+    <!--侧滑返回-->
 
     <style name="SwipeBackLayout">
         <item name="edge_size">50dp</item>

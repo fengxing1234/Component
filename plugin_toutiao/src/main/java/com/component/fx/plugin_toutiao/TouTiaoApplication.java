@@ -2,9 +2,9 @@ package com.component.fx.plugin_toutiao;
 
 import android.app.Application;
 import android.content.Context;
+import android.support.v7.app.AppCompatDelegate;
 
 import com.component.fx.plugin_base.BaseApplication;
-import com.component.fx.plugin_base.manager.SPManager;
 
 public class TouTiaoApplication extends BaseApplication {
 
@@ -24,11 +24,9 @@ public class TouTiaoApplication extends BaseApplication {
 //        if (SPManager.getInstance().getNightMode()) {
 //            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);//黑天模式
 //        } else {
-//            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//白天模式
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);//白天模式
 //        }
-        SPManager.getInstance().setNightMode(!SPManager.getInstance().getNightMode());
-
-
+//        SPManager.getInstance().setNightMode(!SPManager.getInstance().getNightMode());
     }
 
     @Override

@@ -3,13 +3,13 @@
     package="com.component.fx.plugin_toutiao">
 
     <application
+        android:name=".TouTiaoApplication"
         android:allowBackup="true"
         android:icon="@drawable/toutiao_ic_title"
         android:label="@string/toutiao_app_name"
-        android:name=".TouTiaoApplication"
         android:roundIcon="@mipmap/toutiao_ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Base_DayNight_Theme.No_Title">
+        android:theme="@style/TouTiao_DayTheme">
         <activity android:name=".PluginTouTiaoActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

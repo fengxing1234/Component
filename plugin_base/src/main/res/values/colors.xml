@@ -2,13 +2,19 @@
 <resources>
 
     <!--白天模式的主题-->
-    <color name="toutiao_colorPrimary">#009688</color>
-    <color name="toutiao_colorPrimaryDark">#00796B</color>
-    <color name="toutiao_colorAccent">#009688</color>
+    <color name="toutiao_colorPrimary">#E91E63</color>
+    <color name="toutiao_colorPrimaryDark">#C2185B</color>
+    <color name="toutiao_colorAccent">#FF5252</color>
     <color name="toutiao_textColorPrimary">#616161</color>
     <color name="toutiao_viewBackground">@color/white</color>
     <color name="toutiao_windowBackground">@color/Grey100</color>
     <color name="toutiao_line_divider">@color/Grey300</color>
+
+    <color name="toutiao_colorPrimary_night">#35464e</color>
+    <color name="toutiao_colorPrimaryDark_night">#212a2f</color>
+    <color name="toutiao_colorAccent_night">#212a2f</color>
+    <color name="toutiao_textColorPrimary_night">#616161</color>
+    <color name="toutiao_viewBackground_night">#212a2f</color>
 
 
     <color name="base_colorPrimary">#3F51B5</color>

@@ -1,31 +1,45 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
         <android.support.design.widget.TabLayout
-            android:id="@+id/toutiao_tab_layout"
+            android:id="@+id/toutiao_news_tab_layout"
+            style="@style/TouTiao_TabLayout"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="1">
+            android:layout_weight="1"
+            android:theme="@style/TouTiao_Base_Theme.AppBarOverlay"
+            app:tabMode="scrollable"
+            app:tabTextColor="@color/gray_9c">
 
         </android.support.design.widget.TabLayout>
 
 
         <ImageButton
+            android:id="@+id/toutiao_add_channel"
             android:layout_width="wrap_content"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:background="@color/toutiao_colorPrimary"
+            android:maxHeight="?attr/actionBarSize"
+            android:paddingBottom="4dp"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:paddingTop="4dp"
+            android:scaleType="center"
+            app:srcCompat="@drawable/base_add_icon" />
     </LinearLayout>
 
     <android.support.v4.view.ViewPager
         android:id="@+id/toutiao_view_pager"
         android:layout_width="match_parent"
-        android:background="@color/yellow"
         android:layout_height="match_parent">
 
     </android.support.v4.view.ViewPager>
