@@ -1,5 +1,7 @@
 package com.component.fx.plugin_base;
 
+import java.io.File;
+
 public class AppConfig {
 
     public static final String LoginApp = "com.component.fx.plugin_login.LoginApplication";
@@ -14,4 +16,9 @@ public class AppConfig {
     public static String[] moduleApps = {
             LoginApp, ShareApp, TouTiaoApp
     };
+
+
+    public static final File getCacheFile() {
+        return BaseApplication.getAppContext().getCacheDir();
+    }
 }

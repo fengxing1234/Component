@@ -68,7 +68,12 @@ dependencies {
     api 'io.reactivex.rxjava2:rxandroid:2.1.1'
     api 'com.squareup.retrofit2:adapter-rxjava2:2.4.0'
 
+    // AutoDispose 使用 0.8以上的版本 需要 迁移到AndroidX 否则报错
+    api 'com.uber.autodispose:autodispose:0.7.0'
+    api 'com.uber.autodispose:autodispose-android:0.7.0'
+    api 'com.uber.autodispose:autodispose-android-archcomponents:0.7.0'
 
+    //glide
     api 'com.github.bumptech.glide:glide:4.9.0'
 
     //上拉刷新库
