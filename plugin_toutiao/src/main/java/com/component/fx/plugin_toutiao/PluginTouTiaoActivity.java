@@ -1,5 +1,6 @@
 package com.component.fx.plugin_toutiao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -10,6 +11,7 @@ import android.support.v4.app.FragmentTransaction;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
@@ -18,6 +20,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
+import com.component.fx.plugin_base.manager.SPManager;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.fragment.TouTiaoHotFragment;
 import com.component.fx.plugin_toutiao.fragment.TouTiaoNewsFragment;
@@ -186,6 +189,20 @@ public class PluginTouTiaoActivity extends AppCompatActivity {
                 switch (menuItem.getItemId()) {
                     case R.id.toutiao_menu_switch_theme:
                         ToastUtil.toast("切换主题");
+                        boolean nightMode = SPManager.getInstance().getNightMode();
+                        if (nightMode) {
+                            SPManager.getInstance().setNightMode(false);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
+                        } else {
+                            SPManager.getInstance().setNightMode(true);
+                            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES);
+                        }
+//                        getWindow().setWindowAnimations(R.style.WindowAnimationFadeInOut);
+//                        recreate();
+
+                        startActivity(new Intent(PluginTouTiaoActivity.this,PluginTouTiaoActivity.class));
+                        overridePendingTransition(R.anim.fade_in,R.anim.fade_out);
+                        finish();
                         break;
                     case R.id.toutiao_menu_nav_setting:
                         ToastUtil.toast("设置");

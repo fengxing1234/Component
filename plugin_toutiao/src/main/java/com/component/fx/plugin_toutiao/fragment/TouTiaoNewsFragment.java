@@ -49,6 +49,7 @@ public class TouTiaoNewsFragment extends Fragment {
         viewPager = (ViewPager) view.findViewById(R.id.toutiao_view_pager);
         pagerAdapter = new TouTiaoNewsPagerAdapter(getChildFragmentManager(), titles);
         viewPager.setAdapter(pagerAdapter);
+        viewPager.setOffscreenPageLimit(15);
         tabLayout.setupWithViewPager(viewPager);
     }
 

@@ -1,6 +1,5 @@
 package com.component.fx;
 
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -90,7 +89,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (itemId) {
                     case R.id.project_home:
                         ToastUtil.toast("点击了 主页");
-                        startActivity(new Intent(MainActivity.this, TestCoordinatorActivity.class));
+                        //startActivity(new Intent(MainActivity.this, TestCoordinatorActivity.class));
                         break;
                     case R.id.project_id:
                         ToastUtil.toast("点击了 主页id");

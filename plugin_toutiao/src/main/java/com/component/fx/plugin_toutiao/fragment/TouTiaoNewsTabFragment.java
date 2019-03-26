@@ -6,10 +6,14 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
+import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.component.fx.plugin_toutiao.R;
 
 public class TouTiaoNewsTabFragment extends Fragment {
 
@@ -17,6 +21,8 @@ public class TouTiaoNewsTabFragment extends Fragment {
 
     public static final String NEWS_CATEGORY_KEY = "news_category_key";
     private String type;
+    private SwipeRefreshLayout refreshLayout;
+    private RecyclerView recyclerView;
 
     public static TouTiaoNewsTabFragment getInstance(String type) {
         TouTiaoNewsTabFragment fragment = new TouTiaoNewsTabFragment();
@@ -70,7 +76,14 @@ public class TouTiaoNewsTabFragment extends Fragment {
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         Log.d(TAG, "onCreateView: " + "   新闻类型 : " + type);
-        return super.onCreateView(inflater, container, savedInstanceState);
+        View view = inflater.inflate(R.layout.toutiao_fragment_item_layout, container, false);
+        initView(view);
+        return view;
+    }
+
+    private void initView(View view) {
+        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.toutiao_refresh_layout);
+        recyclerView = (RecyclerView) view.findViewById(R.id.toutiao_recycle_view);
     }
 
     @Override

@@ -61,6 +61,8 @@
         <item name="android:textColorPrimary">@color/toutiao_textColorPrimary</item>
         <!--窗口背景-->
         <item name="android:windowBackground">@color/toutiao_viewBackground</item>
+
+
     </style>
 
     <style name="TouTiao_Base_Theme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar">
@@ -68,6 +70,7 @@
     </style>
 
 
+    <!--头条 tablayout 统一样式-->
     <style name="TouTiao_TabLayout" parent="Base.Widget.Design.TabLayout">
         <item name="tabIndicatorColor">#FFFFFF</item>
         <item name="tabIndicatorHeight">2dp</item>
@@ -76,6 +79,11 @@
         <item name="tabBackground">@color/toutiao_colorPrimary</item>
         <item name="tabTextAppearance">@style/TextAppearance.Design.Tab</item>
         <item name="tabSelectedTextColor">?android:textColorPrimary</item>
+    </style>
+
+    <style name="WindowAnimationFadeInOut">
+        <item name="android:windowEnterAnimation">@anim/fade_in</item>
+        <item name="android:windowExitAnimation">@anim/fade_out</item>
     </style>
 
 

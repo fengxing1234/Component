@@ -24,6 +24,8 @@
         <item name="android:navigationBarColor">@color/toutiao_colorPrimary</item>
         <!--状态栏颜色-->
         <!--<item name="android:statusBarColor">@color/transparent</item>-->
+        <!--控制元件的默认状态颜色-->
+        <!--<item name="android:colorControlNormal">@color/colorControlNormal</item>-->
     </style>
 
 </resources>
