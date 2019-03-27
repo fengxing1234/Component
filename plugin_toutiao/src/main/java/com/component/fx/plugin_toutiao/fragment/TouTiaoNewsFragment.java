@@ -1,21 +1,19 @@
 package com.component.fx.plugin_toutiao.fragment;
 
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
-import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.ImageButton;
 
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.adapter.TouTiaoNewsPagerAdapter;
+import com.component.fx.plugin_toutiao.base.BaseFragment;
 
-public class TouTiaoNewsFragment extends Fragment {
+public class TouTiaoNewsFragment extends BaseFragment {
 
+    private static final String TAG = "TouTiaoNewsFragment";
     private TabLayout tabLayout;
     private ImageButton imageButton;
     private ViewPager viewPager;
@@ -35,15 +33,13 @@ public class TouTiaoNewsFragment extends Fragment {
     }
 
 
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.toutiao_main_news_layout, container, false);
-        initView(view);
-        return view;
+    protected int getLayoutRes() {
+        return R.layout.toutiao_main_news_layout;
     }
 
-    private void initView(View view) {
+    @Override
+    protected void initView(View view) {
         tabLayout = (TabLayout) view.findViewById(R.id.toutiao_news_tab_layout);
         imageButton = (ImageButton) view.findViewById(R.id.toutiao_add_channel);
         viewPager = (ViewPager) view.findViewById(R.id.toutiao_view_pager);
@@ -54,9 +50,10 @@ public class TouTiaoNewsFragment extends Fragment {
     }
 
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
-    }
+//    @Override
+//    protected void lazyLoadData() {
+//        Log.d(TAG, "lazyLoadData: ");
+//    }
+
 
 }
