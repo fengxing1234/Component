@@ -5,7 +5,15 @@ import android.support.annotation.Nullable;
 
 public abstract class LazyLoadFragment extends BaseFragment {
 
-    private boolean isFragmentVisible;
+    /**
+     * 页面是否可见
+     */
+
+    protected boolean isFragmentVisible;
+    /**
+     * 是否加载过数据
+     */
+    protected boolean isDataInitiated;
 
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
@@ -17,13 +25,15 @@ public abstract class LazyLoadFragment extends BaseFragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        //进入app 默认 显示第一个页面 如果不上这行代码 默认不会加载数据
         tryLazyLoadData();
     }
 
     private void tryLazyLoadData() {
         //页面可见 并且 view初始化完成
-        if (isFragmentVisible && isViewCreate) {
+        if (isFragmentVisible && isViewCreate && !isDataInitiated) {
             lazyLoadData();
+            isDataInitiated = true;
         }
     }
 

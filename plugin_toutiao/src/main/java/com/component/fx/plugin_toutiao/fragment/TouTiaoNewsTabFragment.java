@@ -2,22 +2,19 @@ package com.component.fx.plugin_toutiao.fragment;
 
 import android.arch.lifecycle.Lifecycle;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.LayoutInflater;
+import android.util.Log;
 import android.view.View;
-import android.view.ViewGroup;
 
 import com.component.fx.plugin_base.network.TouTiaoRetrofit;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.adapter.TouTiaoNewsRecycleAdapter;
 import com.component.fx.plugin_toutiao.api.IMobileNewsApi;
+import com.component.fx.plugin_toutiao.base.LazyLoadFragment;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBean;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBeanData;
 import com.google.gson.Gson;
@@ -35,9 +32,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
-public class TouTiaoNewsTabFragment extends Fragment {
-
-    private static final String TAG = "TouTiaoNewsTabFragment";
+public class TouTiaoNewsTabFragment extends LazyLoadFragment {
 
     public static final String NEWS_CATEGORY_KEY = "news_category_key";
     private String type;
@@ -57,29 +52,28 @@ public class TouTiaoNewsTabFragment extends Fragment {
         return fragment;
     }
 
-
-    @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.toutiao_fragment_item_layout, container, false);
-        initView(view);
-        return view;
+    protected int getLayoutRes() {
+        return R.layout.toutiao_fragment_item_layout;
     }
 
-    private void initView(View view) {
+    @Override
+    protected void initView(View view) {
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.toutiao_refresh_layout);
         recyclerView = (RecyclerView) view.findViewById(R.id.toutiao_recycle_view);
-    }
-
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState) {
-        super.onActivityCreated(savedInstanceState);
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
         adapter = new TouTiaoNewsRecycleAdapter();
         recyclerView.setAdapter(adapter);
-        //getNewsData();
+
+    }
+
+    @Override
+    protected void lazyLoadData() {
+        Log.d(TAG, "lazyLoadData: ");
+        getNewsData();
+
     }
 
     public void getNewsData() {
@@ -157,7 +151,7 @@ public class TouTiaoNewsTabFragment extends Fragment {
                     @Override
                     public void accept(List<MultiNewsArticleBeanData> list) throws Exception {
                         if (list != null && list.size() > 0) {
-
+                            adapter.setData(list);
                         } else {
 
                         }

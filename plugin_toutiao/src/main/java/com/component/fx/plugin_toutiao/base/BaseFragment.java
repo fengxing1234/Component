@@ -13,7 +13,7 @@ import android.view.ViewGroup;
 
 public abstract class BaseFragment extends Fragment {
 
-    private final String TAG = this.getClass().getSimpleName();
+    protected final String TAG = this.getClass().getSimpleName();
     // 界面是否已创建完成
     protected boolean isViewCreate;
 
