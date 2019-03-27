@@ -6,7 +6,7 @@
     <color name="toutiao_colorPrimaryDark">#C2185B</color>
     <color name="toutiao_colorAccent">#FF5252</color>
     <color name="toutiao_textColorPrimary">#616161</color>
-    <color name="toutiao_viewBackground">@color/white</color>
+    <color name="toutiao_viewBackground">@color/Grey100</color>
     <color name="toutiao_windowBackground">@color/Grey100</color>
     <color name="toutiao_line_divider">@color/Grey300</color>
 

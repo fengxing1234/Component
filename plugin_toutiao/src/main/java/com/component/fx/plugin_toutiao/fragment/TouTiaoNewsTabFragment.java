@@ -78,7 +78,7 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
 
     public void getNewsData() {
         IMobileNewsApi mobileNewsApi = TouTiaoRetrofit.getRetrofit().create(IMobileNewsApi.class);
-        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle("news_hot", getCurrentTimeStamp());
+        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle("video", getCurrentTimeStamp());
         observable
                 .subscribeOn(Schedulers.io())
                 .switchMap(new Function<MultiNewsArticleBean, ObservableSource<MultiNewsArticleBeanData>>() {

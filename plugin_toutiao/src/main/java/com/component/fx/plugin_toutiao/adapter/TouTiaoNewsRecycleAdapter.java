@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -14,9 +15,7 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
-import com.bumptech.glide.load.resource.bitmap.CircleCrop;
-import com.bumptech.glide.request.RequestOptions;
+import com.component.fx.plugin_base.utils.GlideUtils;
 import com.component.fx.plugin_base.utils.TimeUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
@@ -30,6 +29,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     private static final int VIDEO_VIEW_TYPE = 0x001;
     private static final int IMAGE_VIEW_TYPE = 0x002;
     private static final int TEXT_VIEW_TYPE = 0x003;
+    private static final String TAG = "TouTiaoNewsRecycleAdapter";
 
     private List<MultiNewsArticleBeanData> mList = new ArrayList<>();
 
@@ -58,9 +58,8 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
                 break;
 
             case VIDEO_VIEW_TYPE:
-                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_video_content, viewGroup, false);
                 break;
-
             default:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
                 break;
@@ -74,6 +73,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     public int getItemViewType(int position) {
         final MultiNewsArticleBeanData data = mList.get(position);
         boolean hasVideo = data.isHas_video();
+        Log.d(TAG, "getItemViewType: "+hasVideo + "  position = "+position);
         if (hasVideo) {
             return VIDEO_VIEW_TYPE;
         } else if (data.getImage_list() != null && data.getImage_list().size() > 0) {
@@ -105,10 +105,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             //设置头像
             MultiNewsArticleBeanData.UserInfoBean user_info = data.getUser_info();
             if (user_info != null && !TextUtils.isEmpty(user_info.getAvatar_url())) {
-                Glide.with(holder.getContext())
-                        .load(user_info.getAvatar_url())
-                        .apply(RequestOptions.bitmapTransform(new CircleCrop()))
-                        .into(ivHeader);
+                GlideUtils.loadCircleImage(holder.getContext(), user_info.getAvatar_url(), R.color.toutiao_viewBackground, ivHeader);
             }
 
             //设置 来源 评论 时间
@@ -121,10 +118,6 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             //标题
             String title = data.getTitle();
             tvTitle.setText(title);
-
-            //内容 摘要
-            final String abstractX = data.getAbstractX();
-            tvContent.setText(abstractX);
 
             ivMore.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -145,9 +138,32 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             });
 
             int itemViewType = getItemViewType(position);
+
+            if (itemViewType == TEXT_VIEW_TYPE) {
+                //内容 摘要
+                String abstractX = data.getAbstractX();
+                tvContent.setText(abstractX);
+            }
+
             if (itemViewType == IMAGE_VIEW_TYPE) {
                 ImageView ivThumbnail = (ImageView) holder.getViewId(R.id.toutiao_iv_thumbnail);
-                Glide.with(holder.getContext()).load(data.getImage_list().get(0).getUrlX()).apply(new RequestOptions().centerCrop()).into(ivThumbnail);
+                GlideUtils.loadImage(holder.getContext(), data.getImage_list().get(0).getUrlX(), R.color.toutiao_viewBackground, ivThumbnail);
+            }
+
+            if (itemViewType == VIDEO_VIEW_TYPE) {
+
+                ImageView ivVideo = (ImageView) holder.getViewId(R.id.toutiao_iv_video);
+                TextView tvVideoTime = (TextView) holder.getViewId(R.id.toutiao_tv_video_time);
+
+                GlideUtils.loadImageError(holder.getContext(), data.getVideo_detail_info().getDetail_video_large_image().getUrlX(), R.color.toutiao_viewBackground, ivVideo, R.drawable.toutiao_error_image);
+                int video_duration = data.getVideo_duration();
+                String min = String.valueOf(video_duration / 60);
+                String second = String.valueOf(video_duration % 10);
+                if (Integer.parseInt(second) < 10) {
+                    second = "0" + second;
+                }
+                String tv_video_time = min + ":" + second;
+                tvVideoTime.setText(tv_video_time);
             }
 
         }

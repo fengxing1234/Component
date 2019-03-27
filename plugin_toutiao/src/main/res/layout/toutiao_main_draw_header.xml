@@ -3,13 +3,13 @@
     android:id="@+id/toutiao_iv_draw_header_root"
     android:layout_width="match_parent"
     android:layout_height="220dp"
-    android:background="@drawable/error_image">
+    android:background="@drawable/toutiao_error_image">
 
     <ImageView
         android:id="@+id/toutiao_iv_draw_header_img"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:scaleType="centerCrop"
-        android:src="@drawable/error_image"
+        android:src="@drawable/toutiao_error_image"
         android:visibility="gone" />
 </android.support.constraint.ConstraintLayout>
