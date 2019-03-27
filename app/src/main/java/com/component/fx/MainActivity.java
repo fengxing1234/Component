@@ -16,8 +16,12 @@ import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.component.fx.plugin_base.utils.ToastUtil;
 
 
@@ -32,6 +36,12 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        ImageView ivCircle = findViewById(R.id.iv_glide_circle);
+        Glide.with(this)
+                .load(getResources().getDrawable(R.drawable.aaaaaaa))
+                .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                .into(ivCircle);
 
         drawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawerLayout.addDrawerListener(new DrawerLayout.DrawerListener() {
@@ -116,9 +126,9 @@ public class MainActivity extends AppCompatActivity {
         MenuItem item = menu.findItem(R.id.app_bar_search);
         SearchView searchView = (SearchView) item.getActionView();
         searchView.setQueryHint("相应的提示内容");
-        searchView.setIconifiedByDefault(true);
-        searchView.onActionViewExpanded();
-        searchView.setIconified(false);
+        //searchView.setIconifiedByDefault(true);
+        //searchView.onActionViewExpanded();
+        //searchView.setIconified(false);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {

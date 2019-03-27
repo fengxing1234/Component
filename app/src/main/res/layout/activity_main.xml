@@ -30,11 +30,17 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_above="@id/bottom_navigation_view"
-                android:gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="阿手机打开的撒多了" />
+
+            <ImageView
+                android:layout_centerInParent="true"
+                android:id="@+id/iv_glide_circle"
+                android:background="@color/red"
+                android:layout_width="300dp"
+                android:layout_height="300dp"
+                android:scaleType="fitXY" />
 
             <android.support.design.widget.BottomNavigationView
                 android:id="@+id/bottom_navigation_view"

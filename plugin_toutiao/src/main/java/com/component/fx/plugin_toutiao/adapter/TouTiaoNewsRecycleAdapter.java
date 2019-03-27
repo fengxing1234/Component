@@ -15,6 +15,8 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.resource.bitmap.CircleCrop;
+import com.bumptech.glide.request.RequestOptions;
 import com.component.fx.plugin_base.utils.TimeUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
@@ -69,7 +71,10 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             //设置头像
             MultiNewsArticleBeanData.UserInfoBean user_info = data.getUser_info();
             if (user_info != null && !TextUtils.isEmpty(user_info.getAvatar_url())) {
-                Glide.with(holder.getContext()).load(user_info.getAvatar_url()).into(ivHeader);
+                Glide.with(holder.getContext())
+                        .load(user_info.getAvatar_url())
+                        .apply(RequestOptions.bitmapTransform(new CircleCrop()))
+                        .into(ivHeader);
             }
 
             //设置 来源 评论 时间
