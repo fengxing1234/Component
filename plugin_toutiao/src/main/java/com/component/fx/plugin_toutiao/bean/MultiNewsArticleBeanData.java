@@ -146,6 +146,7 @@ public class MultiNewsArticleBeanData {
     private int video_style;
     private List<ActionListBean> action_list;
     private List<FilterWordsBean> filter_words;
+    private List<ImageListBean> image_list;
 
     public String getAbstractX() {
         return abstractX;
@@ -689,6 +690,14 @@ public class MultiNewsArticleBeanData {
 
     public void setFilter_words(List<FilterWordsBean> filter_words) {
         this.filter_words = filter_words;
+    }
+
+    public List<ImageListBean> getImage_list() {
+        return image_list;
+    }
+
+    public void setImage_list(List<ImageListBean> image_list) {
+        this.image_list = image_list;
     }
 
     public static class ForwardInfoBean {
@@ -1306,6 +1315,63 @@ public class MultiNewsArticleBeanData {
 
         public void setName(String name) {
             this.name = name;
+        }
+    }
+
+    public static class ImageListBean {
+        /**
+         * height : 337
+         * uri : list/pgc-image/RLsec6wCdZcO6H
+         * url : http://p9-tt.bytecdn.cn/list/300x196/pgc-image/RLsec6wCdZcO6H.webp
+         * url_list : [{"url":"http://p9-tt.bytecdn.cn/list/300x196/pgc-image/RLsec6wCdZcO6H.webp"},{"url":"http://p3-tt.bytecdn.cn/list/300x196/pgc-image/RLsec6wCdZcO6H.webp"},{"url":"http://p9-tt.bytecdn.cn/list/300x196/pgc-image/RLsec6wCdZcO6H.webp"}]
+         * width : 600
+         */
+
+        private int height;
+        private String uri;
+        @SerializedName("url")
+        private String urlX;
+        private int width;
+        private List<ShareInfoBean.WeixinCoverImageBean.UrlListBean> url_list;
+
+        public int getHeight() {
+            return height;
+        }
+
+        public void setHeight(int height) {
+            this.height = height;
+        }
+
+        public String getUri() {
+            return uri;
+        }
+
+        public void setUri(String uri) {
+            this.uri = uri;
+        }
+
+        public String getUrlX() {
+            return urlX;
+        }
+
+        public void setUrlX(String urlX) {
+            this.urlX = urlX;
+        }
+
+        public int getWidth() {
+            return width;
+        }
+
+        public void setWidth(int width) {
+            this.width = width;
+        }
+
+        public List<ShareInfoBean.WeixinCoverImageBean.UrlListBean> getUrl_list() {
+            return url_list;
+        }
+
+        public void setUrl_list(List<ShareInfoBean.WeixinCoverImageBean.UrlListBean> url_list) {
+            this.url_list = url_list;
         }
     }
 }

@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/base_margin_top_4"
+    android:layout_marginTop="@dimen/base_margin_top_4"
+    android:background="@color/toutiao_viewBackground">
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="16dp"
+        android:layout_marginTop="16dp">
+
+
+        <ImageView
+            android:id="@+id/toutiao_iv_header"
+            android:layout_width="22dp"
+            android:layout_height="22dp"
+            android:layout_marginLeft="16dp"
+            android:layout_marginStart="16dp"
+            app:layout_constraintLeft_toLeftOf="parent" />
+
+        <TextView
+            android:id="@+id/toutiao_tv_extra"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:lines="1"
+            app:layout_constraintTop_toTopOf="@id/toutiao_iv_header"
+            app:layout_constraintBottom_toBottomOf="@id/toutiao_iv_header"
+            android:textAppearance="@style/TextAppearance.AppCompat.Caption"
+            app:layout_constraintLeft_toRightOf="@id/toutiao_iv_header"
+            app:layout_constraintRight_toLeftOf="@+id/toutiao_iv_more"
+            tools:text="新闻源 - 2222条评论 - 1小时前" />
+
+        <ImageView
+            android:id="@+id/toutiao_iv_more"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            app:layout_constraintBaseline_toBaselineOf="@id/toutiao_iv_header"
+            app:layout_constraintRight_toRightOf="parent"
+            app:srcCompat="@drawable/toutiao_ic_dots_horizontal_grey500_24dp" />
+
+
+        <TextView
+            android:id="@+id/toutiao_tv_title"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:ellipsize="end"
+            android:maxLines="2"
+            android:textAppearance="@style/TextAppearance.AppCompat.Title"
+            app:layout_constraintLeft_toLeftOf="@id/toutiao_iv_header"
+            app:layout_constraintRight_toRightOf="@id/toutiao_iv_more"
+            app:layout_constraintTop_toBottomOf="@id/toutiao_iv_header"
+            tools:text="韩国瑜一行参访千年古刹南普陀寺。南普陀寺始建于唐朝末年，毗邻厦门大学，为闽南佛教胜地之一。南普陀寺与高雄佛光山都在两岸文化与佛教文化交流中发挥着重要作用。" />
+
+        <TextView
+            android:id="@+id/toutiao_tv_content"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="4dp"
+            android:maxLines="3"
+            android:ellipsize="end"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
+            app:layout_constraintLeft_toLeftOf="@id/toutiao_tv_title"
+            app:layout_constraintRight_toRightOf="@id/toutiao_tv_title"
+            app:layout_constraintTop_toBottomOf="@id/toutiao_tv_title"
+            tools:text="美国总统当选人特朗普日前暗示，可能拿美国的“一中政策”当谈判筹码，与中国大陆就诸如人民币汇率及南海等争议讨价还价。" />
+
+
+    </android.support.constraint.ConstraintLayout>
+</android.support.v7.widget.CardView>

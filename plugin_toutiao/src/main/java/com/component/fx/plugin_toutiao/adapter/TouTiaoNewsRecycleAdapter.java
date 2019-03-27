@@ -27,6 +27,10 @@ import java.util.List;
 
 public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
+    private static final int VIDEO_VIEW_TYPE = 0x001;
+    private static final int IMAGE_VIEW_TYPE = 0x002;
+    private static final int TEXT_VIEW_TYPE = 0x003;
+
     private List<MultiNewsArticleBeanData> mList = new ArrayList<>();
 
 
@@ -44,13 +48,43 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     @NonNull
     @Override
     public RecyclerView.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
-        View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_new_text_content, viewGroup, false);
+        View view = null;
+        switch (viewType) {
+            case TEXT_VIEW_TYPE:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
+                break;
+            case IMAGE_VIEW_TYPE:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_image_right_content, viewGroup, false);
+                break;
+
+            case VIDEO_VIEW_TYPE:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
+                break;
+
+            default:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
+                break;
+        }
+
         TouTiaoNewsRecycleHolder hodler = new TouTiaoNewsRecycleHolder(view);
         return hodler;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int i) {
+    public int getItemViewType(int position) {
+        final MultiNewsArticleBeanData data = mList.get(position);
+        boolean hasVideo = data.isHas_video();
+        if (hasVideo) {
+            return VIDEO_VIEW_TYPE;
+        } else if (data.getImage_list() != null && data.getImage_list().size() > 0) {
+            return IMAGE_VIEW_TYPE;
+
+        }
+        return TEXT_VIEW_TYPE;
+    }
+
+    @Override
+    public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
 
         if (viewHolder instanceof TouTiaoNewsRecycleHolder) {
             final TouTiaoNewsRecycleHolder holder = (TouTiaoNewsRecycleHolder) viewHolder;
@@ -66,7 +100,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             //内容
             TextView tvContent = (TextView) holder.getViewId(R.id.toutiao_tv_content);
 
-            MultiNewsArticleBeanData data = mList.get(i);
+            MultiNewsArticleBeanData data = mList.get(position);
 
             //设置头像
             MultiNewsArticleBeanData.UserInfoBean user_info = data.getUser_info();
@@ -95,13 +129,13 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             ivMore.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-                    final PopupMenu popupMenu = new PopupMenu(holder.mItemView.getContext(), ivMore, Gravity.END);
+                    final PopupMenu popupMenu = new PopupMenu(holder.getContext(), ivMore, Gravity.END);
                     popupMenu.inflate(R.menu.toutiao_menu_share);
                     popupMenu.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
                         @Override
                         public boolean onMenuItemClick(MenuItem menuItem) {
                             if (menuItem.getItemId() == R.menu.toutiao_menu_share) {
-                                ToastUtil.toast("点击了分享" + i);
+                                ToastUtil.toast("点击了分享" + position);
                             }
                             return true;
                         }
@@ -109,6 +143,12 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
                     popupMenu.show();
                 }
             });
+
+            int itemViewType = getItemViewType(position);
+            if (itemViewType == IMAGE_VIEW_TYPE) {
+                ImageView ivThumbnail = (ImageView) holder.getViewId(R.id.toutiao_iv_thumbnail);
+                Glide.with(holder.getContext()).load(data.getImage_list().get(0).getUrlX()).apply(new RequestOptions().centerCrop()).into(ivThumbnail);
+            }
 
         }
     }
