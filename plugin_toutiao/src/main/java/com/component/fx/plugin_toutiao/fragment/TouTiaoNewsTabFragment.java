@@ -17,6 +17,7 @@ import com.component.fx.plugin_toutiao.api.IMobileNewsApi;
 import com.component.fx.plugin_toutiao.base.LazyLoadFragment;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBean;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBeanData;
+import com.component.fx.plugin_toutiao.widget.OnRecycleViewScrollListener;
 import com.google.gson.Gson;
 import com.uber.autodispose.AutoDispose;
 import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
@@ -68,6 +69,13 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
         recyclerView.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.toutiao_colorPrimary));
+        recyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
+            @Override
+            public void onLoadMore() {
+                LogUtils.d(TAG, "onLoadMore: ");
+                getNewsData();
+            }
+        });
     }
 
     @Override
@@ -162,7 +170,8 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
                     @Override
                     public void accept(List<MultiNewsArticleBeanData> list) throws Exception {
                         if (list != null && list.size() > 0) {
-                            adapter.setData(list);
+                            mList.addAll(list);
+                            adapter.setData(mList);
                             refreshLayout.setRefreshing(false);
                         } else {
 
@@ -182,7 +191,11 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
 
     @Override
     public void onRefresh() {
-        refreshLayout.setRefreshing(true);
-        getNewsData();
+        int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
+        if (firstVisibleItemPosition == 0) {
+            mList.clear();
+            refreshLayout.setRefreshing(true);
+            getNewsData();
+        }
     }
 }

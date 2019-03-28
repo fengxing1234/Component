@@ -1,8 +1,12 @@
 package com.component.fx.plugin_toutiao.adapter;
 
 import android.content.Context;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.Drawable;
+import android.os.Build;
 import android.support.annotation.IdRes;
 import android.support.annotation.NonNull;
+import android.support.v4.graphics.drawable.DrawableCompat;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -13,6 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.component.fx.plugin_base.utils.GlideUtils;
@@ -29,6 +34,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     private static final int VIDEO_VIEW_TYPE = 0x001;
     private static final int IMAGE_VIEW_TYPE = 0x002;
     private static final int TEXT_VIEW_TYPE = 0x003;
+    private static final int FOOT_VIEW_TYPE = 0x004;
     private static final String TAG = "TouTiaoNewsRecycleAdapter";
 
     private List<MultiNewsArticleBeanData> mList = new ArrayList<>();
@@ -36,7 +42,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
     public void setData(List<MultiNewsArticleBeanData> list) {
         mList.clear();
-        mList.addAll(0, list);
+        mList.addAll(list);
         notifyDataSetChanged();
     }
 
@@ -64,6 +70,9 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
             case VIDEO_VIEW_TYPE:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_video_content, viewGroup, false);
                 break;
+            case FOOT_VIEW_TYPE:
+                view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_foot_view, viewGroup, false);
+                break;
             default:
                 view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.toutiao_fragment_news_text_content, viewGroup, false);
                 break;
@@ -80,7 +89,11 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemViewType(int position) {
-        final MultiNewsArticleBeanData data = mList.get(position);
+        if (mList.size() == position) {
+            return FOOT_VIEW_TYPE;
+        }
+
+        MultiNewsArticleBeanData data = mList.get(position);
         boolean hasVideo = data.isHas_video();
         if (hasVideo) {
             return VIDEO_VIEW_TYPE;
@@ -95,7 +108,22 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     public void onBindViewHolder(@NonNull RecyclerView.ViewHolder viewHolder, final int position) {
         try {
             if (viewHolder instanceof TouTiaoNewsRecycleHolder) {
+
                 final TouTiaoNewsRecycleHolder holder = (TouTiaoNewsRecycleHolder) viewHolder;
+
+                int itemViewType = getItemViewType(position);
+                if (itemViewType == FOOT_VIEW_TYPE) {
+                    final ProgressBar progressBar = (ProgressBar) holder.getViewId(R.id.progress_footer);
+                    int color = holder.getContext().getResources().getColor(R.color.toutiao_colorPrimary);
+                    if (Build.VERSION.SDK_INT < Build.VERSION_CODES.LOLLIPOP) {
+                        Drawable wrapDrawable = DrawableCompat.wrap(progressBar.getIndeterminateDrawable());
+                        DrawableCompat.setTint(wrapDrawable, color);
+                        progressBar.setIndeterminateDrawable(DrawableCompat.unwrap(wrapDrawable));
+                    } else {
+                        progressBar.getIndeterminateDrawable().setColorFilter(color, PorterDuff.Mode.SRC_IN);
+                    }
+                    return;
+                }
 
                 //头像
                 ImageView ivHeader = (ImageView) holder.getViewId(R.id.toutiao_iv_header);
@@ -145,7 +173,6 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
                     }
                 });
 
-                int itemViewType = getItemViewType(position);
 
                 if (itemViewType == TEXT_VIEW_TYPE) {
                     //内容 摘要
@@ -188,7 +215,7 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
     @Override
     public int getItemCount() {
-        return mList.size();
+        return mList.size() == 0 ? 0 : mList.size() + 1;
     }
 
     private static class TouTiaoNewsRecycleHolder extends RecyclerView.ViewHolder {
