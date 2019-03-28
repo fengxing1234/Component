@@ -6,10 +6,11 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import com.component.fx.plugin_base.utils.LogUtils;
 
 public abstract class BaseFragment extends Fragment {
 
@@ -17,37 +18,41 @@ public abstract class BaseFragment extends Fragment {
     // 界面是否已创建完成
     protected boolean isViewCreate;
 
+    @NonNull
+    protected Context context;
+
     @Override
     public void setUserVisibleHint(boolean isVisibleToUser) {
         super.setUserVisibleHint(isVisibleToUser);
 
-        Log.d(TAG, "setUserVisibleHint: " + isVisibleToUser);
+        LogUtils.d(TAG, "setUserVisibleHint: " + isVisibleToUser);
     }
 
     @Override
     public boolean getUserVisibleHint() {
-        Log.d(TAG, "getUserVisibleHint: ");
+        LogUtils.d(TAG, "getUserVisibleHint: ");
         return super.getUserVisibleHint();
     }
 
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        Log.d(TAG, "onAttach: ");
+        this.context = context;
+        LogUtils.d(TAG, "onAttach: ");
     }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.d(TAG, "onCreate: ");
+        LogUtils.d(TAG, "onCreate: ");
     }
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(getLayoutRes(), container, false);
-        initView(view);
         iniData();
+        initView(view);
         return view;
 
     }
@@ -76,68 +81,68 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onResume() {
         super.onResume();
-        Log.d(TAG, "onResume: ");
+        LogUtils.d(TAG, "onResume: ");
     }
 
 
     @Override
     public void onPause() {
         super.onPause();
-        Log.d(TAG, "onPause: ");
+        LogUtils.d(TAG, "onPause: ");
     }
 
     @Override
     public void onStart() {
         super.onStart();
-        Log.d(TAG, "onStart: ");
+        LogUtils.d(TAG, "onStart: ");
     }
 
     @Override
     public void onStop() {
         super.onStop();
-        Log.d(TAG, "onStop: ");
+        LogUtils.d(TAG, "onStop: ");
     }
 
     @Override
     public void onDestroy() {
         super.onDestroy();
-        Log.d(TAG, "onDestroy: ");
+        LogUtils.d(TAG, "onDestroy: ");
     }
 
     @Override
     public void onAttachFragment(Fragment childFragment) {
         super.onAttachFragment(childFragment);
-        Log.d(TAG, "onAttachFragment: ");
+        LogUtils.d(TAG, "onAttachFragment: ");
     }
 
     @Override
     public void onConfigurationChanged(Configuration newConfig) {
         super.onConfigurationChanged(newConfig);
-        Log.d(TAG, "onConfigurationChanged: ");
+        LogUtils.d(TAG, "onConfigurationChanged: ");
     }
 
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
-        Log.d(TAG, "onHiddenChanged: " + hidden);
+        LogUtils.d(TAG, "onHiddenChanged: " + hidden);
     }
 
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-        Log.d(TAG, "onLowMemory: ");
+        LogUtils.d(TAG, "onLowMemory: ");
     }
 
 
     @Override
     public void onViewStateRestored(@Nullable Bundle savedInstanceState) {
         super.onViewStateRestored(savedInstanceState);
-        Log.d(TAG, "onViewStateRestored: ");
+        LogUtils.d(TAG, "onViewStateRestored: ");
     }
 
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
-        Log.d(TAG, "onSaveInstanceState: ");
+        LogUtils.d(TAG, "onSaveInstanceState: ");
         super.onSaveInstanceState(outState);
     }
 
@@ -145,13 +150,13 @@ public abstract class BaseFragment extends Fragment {
     @Override
     public void onDetach() {
         super.onDetach();
-        Log.d(TAG, "onDetach: ");
+        LogUtils.d(TAG, "onDetach: ");
     }
 
     @Override
     public void onDestroyView() {
         isViewCreate = false;
         super.onDestroyView();
-        Log.d(TAG, "onDestroyView: ");
+        LogUtils.d(TAG, "onDestroyView: ");
     }
 }

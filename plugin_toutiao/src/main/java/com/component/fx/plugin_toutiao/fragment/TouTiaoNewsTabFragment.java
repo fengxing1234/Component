@@ -6,10 +6,10 @@ import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
 
 import com.component.fx.plugin_base.network.TouTiaoRetrofit;
+import com.component.fx.plugin_base.utils.LogUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.adapter.TouTiaoNewsRecycleAdapter;
@@ -70,15 +70,24 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
     }
 
     @Override
-    protected void lazyLoadData() {
-        Log.d(TAG, "lazyLoadData: ");
-        getNewsData();
+    protected void iniData() {
+        Bundle arguments = getArguments();
+        if (arguments != null) {
+            type = arguments.getString(NEWS_CATEGORY_KEY);
+        } else {
+            type = "news_hot";
+        }
+    }
 
+    @Override
+    protected void lazyLoadData() {
+        LogUtils.d(TAG, "lazyLoadData: "+type);
+        getNewsData();
     }
 
     public void getNewsData() {
         IMobileNewsApi mobileNewsApi = TouTiaoRetrofit.getRetrofit().create(IMobileNewsApi.class);
-        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle("video", getCurrentTimeStamp());
+        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle(type, getCurrentTimeStamp());
         observable
                 .subscribeOn(Schedulers.io())
                 .switchMap(new Function<MultiNewsArticleBean, ObservableSource<MultiNewsArticleBeanData>>() {
@@ -167,5 +176,4 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
     public String getCurrentTimeStamp() {
         return String.valueOf(System.currentTimeMillis() / 1000);
     }
-
 }

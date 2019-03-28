@@ -9,52 +9,52 @@
         <item>娱乐</item>
         <item>科技</item>
 
-        <!--<item>问答</item>-->
-        <!--<item>汽车</item>-->
-        <!--<item>财经</item>-->
-        <!--<item>军事</item>-->
-        <!--<item>体育</item>-->
+        <item>问答</item>
+        <item>汽车</item>
+        <item>财经</item>
+        <item>军事</item>
+        <item>体育</item>
 
-        <!--<item>国际</item>-->
-        <!--<item>健康</item>-->
-        <!--<item>房产</item>-->
-        <!--<item>育儿</item>-->
-        <!--<item>数码</item>-->
+        <item>国际</item>
+        <item>健康</item>
+        <item>房产</item>
+        <item>育儿</item>
+        <item>数码</item>
 
-        <!--<item>美食</item>-->
-        <!--<item>养生</item>-->
-        <!--<item>电影</item>-->
-        <!--<item>手机</item>-->
-        <!--<item>教育</item>-->
+        <item>美食</item>
+        <item>养生</item>
+        <item>电影</item>
+        <item>手机</item>
+        <item>教育</item>
 
-        <!--<item>旅游</item>-->
-        <!--<item>宠物</item>-->
-        <!--<item>文化</item>-->
-        <!--<item>故事</item>-->
-        <!--<item>游戏</item>-->
+        <item>旅游</item>
+        <item>宠物</item>
+        <item>文化</item>
+        <item>故事</item>
+        <item>游戏</item>
 
-        <!--<item>股票</item>-->
-        <!--<item>动漫</item>-->
-        <!--<item>情感</item>-->
-        <!--<item>精选</item>-->
-        <!--<item>星座</item>-->
+        <item>股票</item>
+        <item>动漫</item>
+        <item>情感</item>
+        <item>精选</item>
+        <item>星座</item>
 
-        <!--<item>家居</item>-->
-        <!--<item>三农</item>-->
-        <!--<item>孕产</item>-->
-        <!--<item>收藏</item>-->
-        <!--<item>时尚</item>-->
+        <item>家居</item>
+        <item>三农</item>
+        <item>孕产</item>
+        <item>收藏</item>
+        <item>时尚</item>
 
-        <!--<item>历史</item>-->
-        <!--<item>搞笑</item>-->
-        <!--<item>辟谣</item>-->
-        <!--<item>中国新唱将</item>-->
-        <!--<item>彩票</item>-->
+        <item>历史</item>
+        <item>搞笑</item>
+        <item>辟谣</item>
+        <item>中国新唱将</item>
+        <item>彩票</item>
 
-        <!--<item>快乐男声</item>-->
-        <!--<item>正能量</item>-->
-        <!--<item>政务</item>-->
-        <!--<item>探索</item>-->
+        <item>快乐男声</item>
+        <item>正能量</item>
+        <item>政务</item>
+        <item>探索</item>
 
     </string-array>
 

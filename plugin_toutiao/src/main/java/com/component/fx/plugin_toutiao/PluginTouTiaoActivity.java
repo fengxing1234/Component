@@ -14,13 +14,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.app.AppCompatDelegate;
 import android.support.v7.widget.SearchView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 
 import com.component.fx.plugin_base.manager.SPManager;
+import com.component.fx.plugin_base.utils.LogUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.fragment.TouTiaoHotFragment;
 import com.component.fx.plugin_toutiao.fragment.TouTiaoNewsFragment;
@@ -95,7 +95,7 @@ public class PluginTouTiaoActivity extends AppCompatActivity {
         FragmentManager fragmentManager = getSupportFragmentManager();
         //FragmentTransaction 会重新创建实例
         FragmentTransaction transaction = fragmentManager.beginTransaction();
-        Log.d(TAG, "会不会重复创建实例 transaction : " + transaction);
+        LogUtils.d(TAG, "会不会重复创建实例 transaction : " + transaction);
         if (mShowFragment != null) {
             transaction.hide(mShowFragment);
         }
