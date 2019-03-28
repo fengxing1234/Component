@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import android.support.v7.widget.PopupMenu;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
+import android.util.SparseArray;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
@@ -35,13 +36,17 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
     public void setData(List<MultiNewsArticleBeanData> list) {
         mList.clear();
-        mList.addAll(list);
+        mList.addAll(0, list);
         notifyDataSetChanged();
     }
 
     public void addData(List<MultiNewsArticleBeanData> list) {
         mList.addAll(list);
         notifyDataSetChanged();
+    }
+
+    public List<MultiNewsArticleBeanData> getData() {
+        return mList;
     }
 
     @NonNull
@@ -189,10 +194,12 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
     private static class TouTiaoNewsRecycleHolder extends RecyclerView.ViewHolder {
 
         private View mItemView;
+        private SparseArray<View> mViews;
 
         public TouTiaoNewsRecycleHolder(@NonNull View itemView) {
             super(itemView);
             this.mItemView = itemView;
+            mViews = new SparseArray<>();
         }
 
         public Context getContext() {
@@ -201,8 +208,13 @@ public class TouTiaoNewsRecycleAdapter extends RecyclerView.Adapter {
 
         public View getViewId(@IdRes int resId) {
             if (mItemView == null) return null;
+            View view = mViews.get(resId);
+            if (view == null) {
+                view = mItemView.findViewById(resId);
+                mViews.put(resId, view);
+            }
+            return view;
 
-            return mItemView.findViewById(resId);
         }
     }
 }

@@ -32,7 +32,7 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
-public class TouTiaoNewsTabFragment extends LazyLoadFragment {
+public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener {
 
     public static final String NEWS_CATEGORY_KEY = "news_category_key";
     private String type;
@@ -66,7 +66,8 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
         recyclerView.setHasFixedSize(true);
         adapter = new TouTiaoNewsRecycleAdapter();
         recyclerView.setAdapter(adapter);
-
+        refreshLayout.setOnRefreshListener(this);
+        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.toutiao_colorPrimary));
     }
 
     @Override
@@ -81,11 +82,12 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
 
     @Override
     protected void lazyLoadData() {
-        LogUtils.d(TAG, "lazyLoadData: "+type);
+        LogUtils.d(TAG, "lazyLoadData: " + type);
         getNewsData();
     }
 
     public void getNewsData() {
+        refreshLayout.setRefreshing(true);
         IMobileNewsApi mobileNewsApi = TouTiaoRetrofit.getRetrofit().create(IMobileNewsApi.class);
         Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle(type, getCurrentTimeStamp());
         observable
@@ -161,6 +163,7 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
                     public void accept(List<MultiNewsArticleBeanData> list) throws Exception {
                         if (list != null && list.size() > 0) {
                             adapter.setData(list);
+                            refreshLayout.setRefreshing(false);
                         } else {
 
                         }
@@ -175,5 +178,11 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment {
 
     public String getCurrentTimeStamp() {
         return String.valueOf(System.currentTimeMillis() / 1000);
+    }
+
+    @Override
+    public void onRefresh() {
+        refreshLayout.setRefreshing(true);
+        getNewsData();
     }
 }
