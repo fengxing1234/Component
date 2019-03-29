@@ -5,7 +5,7 @@ import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 import com.component.fx.plugin_toutiao.db.tab.MediaChannelTable;
 import com.component.fx.plugin_toutiao.db.tab.NewsChannelTable;
 import com.component.fx.plugin_toutiao.db.tab.SearchHistoryTable;

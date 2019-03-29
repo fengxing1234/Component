@@ -5,7 +5,7 @@ import android.view.View;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.component.fx.plugin_base.BaseActivity;
+import com.component.fx.plugin_base.base.BaseActivity;
 
 @Route(path = "/plugin_login/login")
 public class PluginLoginMainActivity extends BaseActivity {

@@ -4,7 +4,7 @@ import android.app.Application;
 import android.content.Context;
 import android.support.v7.app.AppCompatDelegate;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 import com.component.fx.plugin_base.manager.SPManager;
 
 public class TouTiaoApplication extends BaseApplication {

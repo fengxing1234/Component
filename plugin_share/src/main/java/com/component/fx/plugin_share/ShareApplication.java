@@ -2,7 +2,7 @@ package com.component.fx.plugin_share;
 
 import android.app.Application;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 
 public class ShareApplication extends BaseApplication {
 

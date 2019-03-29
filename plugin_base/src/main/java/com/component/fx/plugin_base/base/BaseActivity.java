@@ -1,4 +1,4 @@
-package com.component.fx.plugin_base;
+package com.component.fx.plugin_base.base;
 
 import android.graphics.Color;
 import android.os.Bundle;

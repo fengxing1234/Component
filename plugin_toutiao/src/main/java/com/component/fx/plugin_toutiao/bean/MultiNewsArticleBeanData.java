@@ -1,10 +1,15 @@
 package com.component.fx.plugin_toutiao.bean;
 
+import com.component.fx.plugin_base.base.recycle.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;
 
-public class MultiNewsArticleBeanData {
+public class MultiNewsArticleBeanData implements MultiItemEntity {
+
+    public static final int VIDEO_VIEW_TYPE = 0x001;
+    public static final int IMAGE_VIEW_TYPE = 0x002;
+    public static final int TEXT_VIEW_TYPE = 0x003;
 
     /**
      * abstract : 新华社巴黎3月25日电国家主席习近平25日在巴黎爱丽舍宫同法国总统马克龙会谈。两国元首一致同意，承前启后，继往开来，在新的历史起点上打造更加坚实、稳固、富有活力的中法全面战略伙伴关系。
@@ -1559,5 +1564,16 @@ public class MultiNewsArticleBeanData {
                 this.url_list = url_list;
             }
         }
+    }
+
+    @Override
+    public int getItemType() {
+        boolean has_video = this.has_video;
+        if (has_video) {
+            return VIDEO_VIEW_TYPE;
+        } else if (getImage_list() != null && getImage_list().size() > 0) {
+            return IMAGE_VIEW_TYPE;
+        }
+        return TEXT_VIEW_TYPE;
     }
 }

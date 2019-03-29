@@ -4,7 +4,7 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.bean.NewsChannelBean;
 import com.component.fx.plugin_toutiao.db.TouTiaoDbHelp;

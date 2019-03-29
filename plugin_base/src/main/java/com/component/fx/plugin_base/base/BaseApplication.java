@@ -1,8 +1,9 @@
-package com.component.fx.plugin_base;
+package com.component.fx.plugin_base.base;
 
 import android.app.Application;
 import android.content.Context;
 
+import com.component.fx.plugin_base.BuildConfig;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 

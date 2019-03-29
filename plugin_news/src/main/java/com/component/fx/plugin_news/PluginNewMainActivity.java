@@ -5,7 +5,7 @@ import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
-import com.component.fx.plugin_base.BaseActivity;
+import com.component.fx.plugin_base.base.BaseActivity;
 import com.component.fx.plugin_news.adapter.NewsFragmentPageAdapter;
 import com.component.fx.plugin_news.network.NewsEnum;
 

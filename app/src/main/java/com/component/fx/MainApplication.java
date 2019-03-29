@@ -4,7 +4,7 @@ import android.app.Application;
 
 import com.alibaba.android.arouter.launcher.ARouter;
 import com.component.fx.plugin_base.AppConfig;
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 
 public class MainApplication extends BaseApplication {
 

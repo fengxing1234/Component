@@ -1,5 +1,7 @@
 package com.component.fx.plugin_base;
 
+import com.component.fx.plugin_base.base.BaseApplication;
+
 import java.io.File;
 
 public class AppConfig {

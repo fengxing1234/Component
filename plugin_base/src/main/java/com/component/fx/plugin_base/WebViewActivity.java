@@ -8,6 +8,8 @@ import android.view.ViewGroup;
 import android.webkit.WebView;
 import android.widget.FrameLayout;
 
+import com.component.fx.plugin_base.base.BaseActivity;
+
 public class WebViewActivity extends BaseActivity {
 
     private WebView mWebView;

@@ -2,7 +2,7 @@ package com.component.fx.plugin_base.utils;
 
 import android.widget.Toast;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 
 public class ToastUtil {
 

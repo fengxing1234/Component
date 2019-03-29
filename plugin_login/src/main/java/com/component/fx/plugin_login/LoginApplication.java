@@ -2,7 +2,7 @@ package com.component.fx.plugin_login;
 
 import android.app.Application;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 import com.component.fx.plugin_component.ServiceFactory;
 import com.component.fx.plugin_login.export.ExportAccountService;
 

@@ -3,7 +3,7 @@ package com.component.fx.plugin_news;
 
 import android.app.Application;
 
-import com.component.fx.plugin_base.BaseApplication;
+import com.component.fx.plugin_base.base.BaseApplication;
 
 public class NewsApplication extends BaseApplication {
 
