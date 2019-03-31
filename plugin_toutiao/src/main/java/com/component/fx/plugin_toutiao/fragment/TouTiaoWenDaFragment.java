@@ -12,7 +12,7 @@ import com.component.fx.plugin_base.network.TouTiaoRetrofit;
 import com.component.fx.plugin_base.utils.LogUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
-import com.component.fx.plugin_toutiao.adapter.TouTiaoMultiNewsAdapter;
+import com.component.fx.plugin_toutiao.adapter.TouTiaoMultiWendaAdapter;
 import com.component.fx.plugin_toutiao.api.IMobileWenDaApi;
 import com.component.fx.plugin_toutiao.base.LazyLoadFragment;
 import com.component.fx.plugin_toutiao.bean.WendaArticleBean;
@@ -40,7 +40,7 @@ public class TouTiaoWenDaFragment extends LazyLoadFragment implements SwipeRefre
     private LinearLayoutManager layoutManager;
     private Gson gson = new Gson();
     private List<WendaArticleBeanData> mList = new ArrayList<>();
-    private TouTiaoMultiNewsAdapter multiNewsAdapter;
+    private TouTiaoMultiWendaAdapter multiNewsAdapter;
 
     public static TouTiaoWenDaFragment getInstance() {
 
@@ -64,7 +64,7 @@ public class TouTiaoWenDaFragment extends LazyLoadFragment implements SwipeRefre
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        multiNewsAdapter = new TouTiaoMultiNewsAdapter();
+        multiNewsAdapter = new TouTiaoMultiWendaAdapter();
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_TEXT_TYPE, R.layout.toutiao_fragment_wenda_text_content);
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_THREE_IMG_TYPE, R.layout.toutiao_fragment_wenda_three_image_content);
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_ONE_IMG_TYPE, R.layout.toutiao_fragment_wenda_one_image_content);

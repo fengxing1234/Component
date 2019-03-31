@@ -14,7 +14,7 @@ import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.bean.WendaArticleBeanData;
 
-public class TouTiaoMultiNewsAdapter extends MultiItemBaseAdapter<WendaArticleBeanData> {
+public class TouTiaoMultiWendaAdapter extends MultiItemBaseAdapter<WendaArticleBeanData> {
 
 
     @Override

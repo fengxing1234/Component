@@ -1,12 +1,13 @@
 package com.component.fx.plugin_base.base.recycle;
 
 import android.content.Context;
-import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
+
+import com.component.fx.plugin_base.base.recycle.provider.MultiTypeDelegate;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -31,6 +32,12 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
     }
 
     @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        // TODO: 2019/3/31 需要处理GridLayoutManager
+    }
+
+    @Override
     public int getItemViewType(int position) {
         int headerLayoutCount = getHeaderLayoutCount();
 
@@ -51,11 +58,13 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
     }
 
     protected int getDefItemViewType(int position) {
+        if (multiTypeDelegate != null) {
+            return multiTypeDelegate.getDefItemViewType(mList, position);
+        }
         return super.getItemViewType(position);
     }
 
-    public abstract @LayoutRes
-    int getLayoutRes();
+    public abstract int getLayoutRes();
 
     protected abstract void convert(@NonNull BaseHolder baseHolder, T data, int position);
 
@@ -83,14 +92,35 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
         return BaseHolder.get(view);
     }
 
+    /**
+     * 正常数据 包括多item数据
+     *
+     * @param viewGroup
+     * @param viewType
+     * @return
+     */
     protected BaseHolder onCreateDefViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
+        if (multiTypeDelegate != null) {
+            return BaseHolder.get(multiTypeDelegate.getLayoutId(viewType), viewGroup);
+        }
         return BaseHolder.get(getLayoutRes(), viewGroup);
     }
+
+    private MultiTypeDelegate<T> multiTypeDelegate;
+
+    protected void setMultiTypeDelegate(MultiTypeDelegate<T> multiTypeDelegate) {
+        this.multiTypeDelegate = multiTypeDelegate;
+    }
+
+    protected MultiTypeDelegate getMultiTypeDelegate() {
+        return multiTypeDelegate;
+    }
+
 
     @Override
     public void onBindViewHolder(@NonNull BaseHolder baseHolder, int position) {
         switch (getItemViewType(position)) {
-            case HEADER_VIEW_TYPE:
+            case HEADER_VIEW_TYPE://不做处理
                 break;
             case FOOTER_VIEW_TYPE:
                 break;

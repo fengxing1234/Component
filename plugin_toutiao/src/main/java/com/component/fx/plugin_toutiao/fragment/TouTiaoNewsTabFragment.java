@@ -7,12 +7,13 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.component.fx.plugin_base.network.TouTiaoRetrofit;
 import com.component.fx.plugin_base.utils.LogUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
-import com.component.fx.plugin_toutiao.adapter.TouTiaoNewsRecycleAdapter;
+import com.component.fx.plugin_toutiao.adapter.TouTiaoMultiNewRvAdapter;
 import com.component.fx.plugin_toutiao.api.IMobileNewsApi;
 import com.component.fx.plugin_toutiao.base.LazyLoadFragment;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBean;
@@ -43,7 +44,8 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
 
     private List<MultiNewsArticleBeanData> mList = new ArrayList<>();
     private LinearLayoutManager layoutManager;
-    private TouTiaoNewsRecycleAdapter adapter;
+    //private TouTiaoNewsRecycleAdapter adapter;
+    private TouTiaoMultiNewRvAdapter adapter;
 
     public static TouTiaoNewsTabFragment getInstance(String type) {
         TouTiaoNewsTabFragment fragment = new TouTiaoNewsTabFragment();
@@ -65,7 +67,9 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
         layoutManager = new LinearLayoutManager(getContext());
         recyclerView.setLayoutManager(layoutManager);
         recyclerView.setHasFixedSize(true);
-        adapter = new TouTiaoNewsRecycleAdapter();
+        //adapter = new TouTiaoNewsRecycleAdapter();
+        adapter = new TouTiaoMultiNewRvAdapter();
+        adapter.addFooter(getLayoutInflater().inflate(R.layout.toutiao_fragment_news_foot_view, (ViewGroup) recyclerView.getParent(), false));
         recyclerView.setAdapter(adapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.toutiao_colorPrimary));

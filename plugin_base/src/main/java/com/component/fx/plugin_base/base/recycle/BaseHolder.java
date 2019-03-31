@@ -8,6 +8,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.annotation.IdRes;
+import android.support.annotation.LayoutRes;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
 import android.text.util.Linkify;
@@ -39,7 +40,7 @@ public class BaseHolder extends RecyclerView.ViewHolder {
         return mItemView.getContext();
     }
 
-    public static BaseHolder get(int layoutId, ViewGroup parent) {
+    public static BaseHolder get(@LayoutRes int layoutId, ViewGroup parent) {
         View view = LayoutInflater.from(parent.getContext()).inflate(layoutId, parent, false);
         return new BaseHolder(view);
     }
