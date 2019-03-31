@@ -6,6 +6,7 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 
 import com.component.fx.plugin_base.network.TouTiaoRetrofit;
 import com.component.fx.plugin_base.utils.LogUtils;
@@ -67,7 +68,7 @@ public class TouTiaoWenDaFragment extends LazyLoadFragment implements SwipeRefre
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_TEXT_TYPE, R.layout.toutiao_fragment_wenda_text_content);
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_THREE_IMG_TYPE, R.layout.toutiao_fragment_wenda_three_image_content);
         multiNewsAdapter.addItemType(WendaArticleBeanData.WENDA_ONE_IMG_TYPE, R.layout.toutiao_fragment_wenda_one_image_content);
-
+        multiNewsAdapter.addFooter(getLayoutInflater().inflate(R.layout.toutiao_fragment_news_foot_view, (ViewGroup) recyclerView.getParent(), false));
         recyclerView.setAdapter(multiNewsAdapter);
         refreshLayout.setOnRefreshListener(this);
         refreshLayout.setColorSchemeColors(getResources().getColor(R.color.toutiao_colorPrimary));

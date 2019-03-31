@@ -8,6 +8,7 @@ import android.view.ViewGroup;
 public abstract class MultiItemBaseAdapter<T extends MultiItemEntity> extends BaseAdapter<T> {
 
     public static final int TYPE_NOT_FOUND = -404;
+    private static final int DEFAULT_VIEW_TYPE = -0xff;
 
 
     private SparseIntArray layouts;
@@ -18,8 +19,12 @@ public abstract class MultiItemBaseAdapter<T extends MultiItemEntity> extends Ba
     }
 
     @Override
-    public int getItemViewType(int position) {
-        return mList.get(position).getItemType();
+    protected int getDefItemViewType(int position) {
+        T data = mList.get(position);
+        if (data != null) {
+            return data.getItemType();
+        }
+        return DEFAULT_VIEW_TYPE;
     }
 
     @Override
