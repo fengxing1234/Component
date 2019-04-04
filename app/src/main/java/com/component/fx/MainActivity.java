@@ -1,5 +1,6 @@
 package com.component.fx;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        startActivity(new Intent(this,TestRecycleViewActivity.class));
+        finish();
         ImageView ivCircle = findViewById(R.id.iv_glide_circle);
         Glide.with(this)
                 .load(getResources().getDrawable(R.drawable.aaaaaaa))

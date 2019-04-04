@@ -36,5 +36,5 @@ ext {
     versionCode = 1
     versionName = "1.0"
     //javaVersion = JavaVersion.VERSION_1_8
-    supportLibraryVersion = '28.+'
+    supportLibraryVersion = '28.0.0'
 }

@@ -4,6 +4,7 @@ import android.app.Application;
 import android.content.Context;
 
 import com.component.fx.plugin_base.BuildConfig;
+import com.component.fx.plugin_base.manager.NotifyManager;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -42,6 +43,7 @@ public abstract class BaseApplication extends Application {
             return;
         }
         LeakCanary.install(this);
+        NotifyManager.createChannel();
     }
 
 

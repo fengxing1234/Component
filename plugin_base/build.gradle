@@ -34,6 +34,23 @@ android {
 
 }
 
+//configurations.all {
+//    resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+//        def requested = details.requested
+//        if (requested.group == 'com.android.support') {
+//            if (!requested.name.startsWith("multidex")) {
+//                details.useVersion '28.0.0'
+//            }
+//        }
+//    }
+//}
+
+//configurations.all {
+//    resolutionStrategy {
+//        force "com.android.support:appcompat-v7:28.0.0"
+//    }
+//}
+
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
 
@@ -53,7 +70,9 @@ dependencies {
      * 前提 请使用api。 implementation有问题 上面说到的问题
      */
 
-    api 'com.alibaba:arouter-api:1.4.1'
+    api('com.alibaba:arouter-api:1.4.1') {
+        exclude group: 'com.android.support'
+    }
     annotationProcessor 'com.alibaba:arouter-compiler:1.2.2'
 
     api "com.android.support:design:$rootProject.supportLibraryVersion"

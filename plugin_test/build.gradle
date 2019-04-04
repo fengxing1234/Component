@@ -1,15 +1,26 @@
-apply plugin: 'com.android.library'
+apply plugin: 'com.android.application'
+
+//此模块不当组件使用 专门做一些测试 根据版本的不同哦 可以修改一些版本 但是要做好版本校验 以防崩溃
 
 android {
+
+
+    resourcePrefix "test_"
+
 
     compileSdkVersion rootProject.ext.compileSdkVersion
     buildToolsVersion rootProject.ext.buildToolsVersion
 
+
+
     defaultConfig {
+        applicationId "com.component.fx.plugin_test"
+
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode rootProject.ext.versionCode
         versionName rootProject.ext.versionName
+
 
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
@@ -25,10 +36,12 @@ android {
 }
 
 dependencies {
-    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
 
-    api "com.android.support:appcompat-v7:$rootProject.supportLibraryVersion"
+    api project(':plugin_base')
+
 }

@@ -165,6 +165,17 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
         notifyItemInserted(index);
     }
 
+    public void remove(int index) {
+        mList.remove(index);
+        notifyItemRemoved(index);
+    }
+
+    public void remove(T data) {
+        int i = mList.indexOf(data);
+        mList.remove(data);
+        notifyItemRemoved(i);
+    }
+
     public void addData(int index, List<T> list) {
         if (list == null || list.size() == 0) return;
         mList.addAll(index, list);
