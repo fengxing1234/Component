@@ -20,6 +20,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.RemoteViews;
 
+import com.component.fx.plugin_base.manager.IntentManager;
 import com.component.fx.plugin_base.manager.NotifyManager;
 
 
@@ -56,6 +57,7 @@ public class TestNotificationActivity extends AppCompatActivity {
 
         mNotifyManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 
+        Log.d("feng", "mNm: "+mNotifyManager);
         mBuilder = new NotificationCompat.Builder(context, NotifyManager.CHAT_ChANNEL_ID);
 
 
@@ -63,44 +65,54 @@ public class TestNotificationActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                NotifyManager.openNotifyChannel(NotifyManager.CHAT_ChANNEL_ID);
-
-                new Thread() {
-                    @Override
-                    public void run() {
-                        try {
-                            Thread.sleep(2000);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
-
-                        //showProgressNotify();
-                        // showNotify();
+                boolean notifyEnable = NotifyManager.isNotifyEnable(context);
+                Log.d("fengxing", "onClick: " + notifyEnable);
+                if (notifyEnable) {
+                    NotifyManager.openNotifyChannel(NotifyManager.CHAT_ChANNEL_ID);
+                    testNotify();
+                } else {
+                    startActivity(IntentManager.notifyIntent());
+                }
 
 
-                        mNotifyManager.notify(id++, defaultNotify(context, mBuilder).build());
-
-                        //progressNotify(mBuilder);
-
-                        //mNotifyManager.notify(id++, bigTextStyleNotify(mBuilder).build());
-
-                        //mNotifyManager.notify(id++, inboxStyleNotify(mBuilder).build());
-
-                        //mNotifyManager.notify(id++, bigPictureStyleNotify(mBuilder).build());
-
-                        //mNotifyManager.notify(id++, customBigNotify(mBuilder).build());
-
-                        //mNotifyManager.notify(id++, customNotify(mBuilder).build());
-
-                        //startActivity(new Intent(context, TestWindowNotifyActivity.class));
-
-                        //startService(new Intent(context, TestWindowService.class));
-
-                    }
-                }.start();
             }
-
         });
+    }
+
+    public void testNotify() {
+        new Thread() {
+            @Override
+            public void run() {
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+
+                //showProgressNotify();
+                // showNotify();
+
+
+                mNotifyManager.notify(id++, defaultNotify(context, mBuilder).build());
+
+                //progressNotify(mBuilder);
+
+                //mNotifyManager.notify(id++, bigTextStyleNotify(mBuilder).build());
+
+                //mNotifyManager.notify(id++, inboxStyleNotify(mBuilder).build());
+
+                //mNotifyManager.notify(id++, bigPictureStyleNotify(mBuilder).build());
+
+                //mNotifyManager.notify(id++, customBigNotify(mBuilder).build());
+
+                //mNotifyManager.notify(id++, customNotify(mBuilder).build());
+
+                //startActivity(new Intent(context, TestWindowNotifyActivity.class));
+
+                //startService(new Intent(context, TestWindowService.class));
+
+            }
+        }.start();
     }
 
 
