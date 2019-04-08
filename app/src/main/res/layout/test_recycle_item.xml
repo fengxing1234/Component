@@ -3,16 +3,25 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="80dp"
+    android:layout_marginBottom="@dimen/base_margin_top_4"
     android:layout_marginLeft="@dimen/base_margin_top_4"
     android:layout_marginRight="4dp"
-    android:layout_marginBottom="@dimen/base_margin_top_4"
     android:layout_marginTop="@dimen/base_margin_top_4"
     app:cardElevation="4dp">
 
     <LinearLayout
-        android:background="@color/Grey400"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/Grey400"
+        android:gravity="center">
+
+        <TextView
+            android:id="@+id/tv_num"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:gravity="center"
+            android:textColor="@color/red"
+            android:textSize="26sp" />
 
     </LinearLayout>
 

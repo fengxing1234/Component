@@ -1,14 +1,27 @@
 package com.component.fx.plugin_base.base.recycle;
 
+import android.animation.Animator;
 import android.content.Context;
+import android.support.annotation.IntDef;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Interpolator;
+import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
+import com.component.fx.plugin_base.base.recycle.animator.AlphaInAnimation;
+import com.component.fx.plugin_base.base.recycle.animator.BaseAnimation;
+import com.component.fx.plugin_base.base.recycle.animator.ScaleInAnimation;
+import com.component.fx.plugin_base.base.recycle.animator.SlideInBottomAnimation;
+import com.component.fx.plugin_base.base.recycle.animator.SlideInLeftAnimation;
+import com.component.fx.plugin_base.base.recycle.animator.SlideInRightAnimation;
 import com.component.fx.plugin_base.base.recycle.provider.MultiTypeDelegate;
 
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -19,6 +32,7 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
 
     private static final int HEADER_VIEW_TYPE = 0x00001111;
     private static final int FOOTER_VIEW_TYPE = 0x00002222;
+    private static final String TAG = "BaseAdapter";
 
     protected List<T> mList = new ArrayList<>();
 
@@ -26,6 +40,46 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
 
     private LinearLayout headerLayout;
     private LinearLayout footerLayout;
+    private boolean mEnableAnimation;
+
+
+    ///////////////动画///////////////
+    /**
+     * Use with {@link #openLoadAnimation}
+     */
+    public static final int ALPHAIN = 0x00000001;
+    /**
+     * Use with {@link #openLoadAnimation}
+     */
+    public static final int SCALEIN = 0x00000002;
+    /**
+     * Use with {@link #openLoadAnimation}
+     */
+    public static final int SLIDEIN_BOTTOM = 0x00000003;
+    /**
+     * Use with {@link #openLoadAnimation}
+     */
+    public static final int SLIDEIN_LEFT = 0x00000004;
+    /**
+     * Use with {@link #openLoadAnimation}
+     */
+    public static final int SLIDEIN_RIGHT = 0x00000005;
+    private Interpolator mInterpolator = new LinearInterpolator();
+    //动画效果时长
+    private long mDuration = 300;
+    //上一次显示动画的位置
+    private int mLastLayoutPosition;
+    //每个条目 是否 只显示一次动画 默认 每一个item只显示一次动画
+    private boolean mFirstOnlyEnable = true;
+    //条目自定义动画
+    private BaseAnimation mCustomAnimation;
+    private BaseAnimation mSelectAnimation = new AlphaInAnimation();;
+
+    @IntDef({ALPHAIN, SCALEIN, SLIDEIN_BOTTOM, SLIDEIN_LEFT, SLIDEIN_RIGHT})
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface AnimationType {
+
+    }
 
     protected BaseAdapter() {
 
@@ -35,7 +89,88 @@ public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
     public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
         super.onAttachedToRecyclerView(recyclerView);
         // TODO: 2019/3/31 需要处理GridLayoutManager
+        Log.d(TAG, "onAttachedToRecyclerView: ");
     }
+
+    @Override
+    public void onViewAttachedToWindow(@NonNull BaseHolder holder) {
+        super.onViewAttachedToWindow(holder);
+        Log.d(TAG, "onViewAttachedToWindow: ");
+        addAnimation(holder);
+    }
+
+    public void setDuration(long duration) {
+        this.mDuration = duration;
+    }
+
+    public void openLoadAnimation(BaseAnimation baseAnimation) {
+        this.mCustomAnimation = baseAnimation;
+        openLoadAnimation();
+    }
+
+    public void openLoadAnimation(int animationType) {
+        mCustomAnimation = null;
+        switch (animationType) {
+            case ALPHAIN:
+                mSelectAnimation = new AlphaInAnimation();
+                break;
+            case SCALEIN:
+                mSelectAnimation = new ScaleInAnimation();
+                break;
+            case SLIDEIN_BOTTOM:
+                mSelectAnimation = new SlideInBottomAnimation();
+                break;
+            case SLIDEIN_LEFT:
+                mSelectAnimation = new SlideInLeftAnimation();
+                break;
+            case SLIDEIN_RIGHT:
+                mSelectAnimation = new SlideInRightAnimation();
+                break;
+            default:
+                break;
+        }
+        openLoadAnimation();
+    }
+
+    public void openLoadAnimation() {
+        this.mEnableAnimation = true;
+    }
+
+    /**
+     * 每个条目 是否 只显示一次动画
+     *
+     * @param firstOnlyEnable
+     */
+    public void isFirstOnly(boolean firstOnlyEnable) {
+        this.mFirstOnlyEnable = firstOnlyEnable;
+    }
+
+    private void addAnimation(BaseHolder holder) {
+        if (mEnableAnimation) {
+
+            if (!mFirstOnlyEnable || holder.getLayoutPosition() > mLastLayoutPosition) {
+
+                BaseAnimation animation;
+                if (mCustomAnimation != null) {
+                    animation = mCustomAnimation;
+                } else {
+                    animation = mSelectAnimation;
+                }
+
+                for (Animator animator : animation.getAnimations(holder.itemView)) {
+                    animator.setDuration(mDuration);
+                    animator.start();
+                    animator.setInterpolator(mInterpolator);
+                }
+
+                mLastLayoutPosition = holder.getLayoutPosition();
+            }
+        }
+    }
+
+
+
+
 
     @Override
     public int getItemViewType(int position) {

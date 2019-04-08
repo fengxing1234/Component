@@ -4,12 +4,12 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
-import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
+import android.widget.TextView;
 
 import com.component.fx.plugin_base.base.BaseActivity;
 import com.component.fx.plugin_base.base.recycle.BaseAdapter;
@@ -54,8 +54,8 @@ public class TestRecycleViewActivity extends BaseActivity {
 
         recyclerView.setAdapter(adapter);
         adapter.setData(getData());
-
-        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        adapter.openLoadAnimation(BaseAdapter.SCALEIN);
+        //recyclerView.setItemAnimator(new DefaultItemAnimator());
 
         //RecylerView从空到渲染完内容时执行动画的最佳方式
 
@@ -105,7 +105,7 @@ public class TestRecycleViewActivity extends BaseActivity {
 
         @Override
         protected void convert(@NonNull BaseHolder baseHolder, String data, int position) {
-
+            ((TextView) baseHolder.getView(R.id.tv_num)).setText(data);
         }
     }
 }
