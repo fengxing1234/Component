@@ -13,6 +13,8 @@ import com.component.fx.plugin_toutiao.base.BaseFragment;
 import com.component.fx.plugin_toutiao.bean.NewsChannelBean;
 import com.component.fx.plugin_toutiao.db.dao.NewsChannelDao;
 import com.component.fx.plugin_toutiao.db.tab.NewsChannelTable;
+import com.component.fx.plugin_toutiao.mvp.TouTiaoMvpNewsTabFragment;
+import com.component.fx.plugin_toutiao.mvp.TouTiaoMvpWenDaFragment;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -46,7 +48,7 @@ public class TouTiaoNewsFragment extends BaseFragment {
     }
 
     @Override
-    protected void iniData() {
+    protected void initData() {
         if (dao == null) {
             dao = new NewsChannelDao();
         }
@@ -62,9 +64,11 @@ public class TouTiaoNewsFragment extends BaseFragment {
         for (NewsChannelBean newsChannel : newsChannelList) {
             titles.add(newsChannel.channelName);
             if (WENDA_TYPE.equals(newsChannel.channelId)) {
-                fragments.add(TouTiaoWenDaFragment.getInstance());
+                //fragments.add(TouTiaoWenDaFragment.getInstance());
+                fragments.add(TouTiaoMvpWenDaFragment.getInstance());
             } else {
-                fragments.add(TouTiaoNewsTabFragment.getInstance(newsChannel.channelId));
+                //fragments.add(TouTiaoNewsTabFragment.getInstance(newsChannel.channelId));
+                fragments.add(TouTiaoMvpNewsTabFragment.getInstance(newsChannel.channelId));
             }
 
         }

@@ -1,27 +1,13 @@
-package com.component.fx.plugin_toutiao.fragment;
+package com.component.fx.plugin_toutiao.mvp;
 
-import android.arch.lifecycle.Lifecycle;
-import android.os.Bundle;
-import android.support.v4.widget.SwipeRefreshLayout;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
 
 import com.component.fx.plugin_base.network.TouTiaoRetrofit;
-import com.component.fx.plugin_base.utils.LogUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;
-import com.component.fx.plugin_toutiao.R;
-import com.component.fx.plugin_toutiao.adapter.TouTiaoMultiNewRvAdapter;
 import com.component.fx.plugin_toutiao.api.IMobileNewsApi;
-import com.component.fx.plugin_toutiao.base.LazyLoadFragment;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBean;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBeanData;
-import com.component.fx.plugin_toutiao.widget.OnRecycleViewScrollListener;
 import com.google.gson.Gson;
-import com.uber.autodispose.AutoDispose;
-import com.uber.autodispose.android.lifecycle.AndroidLifecycleScopeProvider;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -34,74 +20,54 @@ import io.reactivex.functions.Function;
 import io.reactivex.functions.Predicate;
 import io.reactivex.schedulers.Schedulers;
 
-public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRefreshLayout.OnRefreshListener {
+public class INewsTabPresenter implements INewsTabContract.Presenter {
 
-    public static final String NEWS_CATEGORY_KEY = "news_category_key";
-    private String type;
-    private SwipeRefreshLayout refreshLayout;
-    private RecyclerView recyclerView;
+    private INewsTabContract.View view;
+
     private Gson gson = new Gson();
 
     private List<MultiNewsArticleBeanData> mList = new ArrayList<>();
-    private LinearLayoutManager layoutManager;
-    //private TouTiaoNewsRecycleAdapter adapter;
-    private TouTiaoMultiNewRvAdapter adapter;
 
-    public static TouTiaoNewsTabFragment getInstance(String type) {
-        TouTiaoNewsTabFragment fragment = new TouTiaoNewsTabFragment();
-        Bundle bundle = new Bundle();
-        bundle.putString(NEWS_CATEGORY_KEY, type);
-        fragment.setArguments(bundle);
-        return fragment;
+    private String type;
+
+    public INewsTabPresenter(INewsTabContract.View view) {
+        this.view = view;
+        view.setPresenter(this);
     }
 
     @Override
-    protected int getLayoutRes() {
-        return R.layout.toutiao_fragment_item_layout;
+    public void start() {
+
     }
 
+    /**
+     * 刷新数据 清除旧数据
+     *
+     * @param category
+     */
     @Override
-    protected void initView(View view) {
-        refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.toutiao_refresh_layout);
-        recyclerView = (RecyclerView) view.findViewById(R.id.toutiao_recycle_view);
-        layoutManager = new LinearLayoutManager(getContext());
-        recyclerView.setLayoutManager(layoutManager);
-        recyclerView.setHasFixedSize(true);
-        //adapter = new TouTiaoNewsRecycleAdapter();
-        adapter = new TouTiaoMultiNewRvAdapter();
-        adapter.addFooter(getLayoutInflater().inflate(R.layout.toutiao_fragment_news_foot_view, (ViewGroup) recyclerView.getParent(), false));
-        recyclerView.setAdapter(adapter);
-        refreshLayout.setOnRefreshListener(this);
-        refreshLayout.setColorSchemeColors(getResources().getColor(R.color.toutiao_colorPrimary));
-        recyclerView.addOnScrollListener(new OnRecycleViewScrollListener() {
-            @Override
-            public void onLoadMore() {
-                LogUtils.d(TAG, "onLoadMore: ");
-                getNewsData();
-            }
-        });
-    }
-
-    @Override
-    protected void initData() {
-        Bundle arguments = getArguments();
-        if (arguments != null) {
-            type = arguments.getString(NEWS_CATEGORY_KEY);
-        } else {
-            type = "news_hot";
+    public void doLoadData(String... category) {
+        if (category.length != 0) {
+            type = category[0];
         }
+
+        if (mList.size() != 0) {
+            mList.clear();
+        }
+        view.onShowLoading();
+        getData(type);
     }
 
     @Override
-    protected void lazyLoadData() {
-        LogUtils.d(TAG, "lazyLoadData: " + type);
-        getNewsData();
+    public void doLoadMoreData() {
+        view.onShowLoading();
+        getData(type);
     }
 
-    public void getNewsData() {
-        refreshLayout.setRefreshing(true);
+
+    public void getData(String category) {
         IMobileNewsApi mobileNewsApi = TouTiaoRetrofit.getRetrofit().create(IMobileNewsApi.class);
-        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle(type, getCurrentTimeStamp());
+        Observable<MultiNewsArticleBean> observable = mobileNewsApi.getNewsArticle(category, getCurrentTimeStamp());
         observable
                 .subscribeOn(Schedulers.io())
                 .switchMap(new Function<MultiNewsArticleBean, ObservableSource<MultiNewsArticleBeanData>>() {
@@ -169,14 +135,14 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
                     }
                 })
                 .observeOn(AndroidSchedulers.mainThread())
-                .as(AutoDispose.<List<MultiNewsArticleBeanData>>autoDisposable(AndroidLifecycleScopeProvider.from(this, Lifecycle.Event.ON_DESTROY)))
+                .as(view.<List<MultiNewsArticleBeanData>>bindAutoDispose())
                 .subscribe(new Consumer<List<MultiNewsArticleBeanData>>() {
                     @Override
                     public void accept(List<MultiNewsArticleBeanData> list) throws Exception {
                         if (list != null && list.size() > 0) {
                             mList.addAll(list);
-                            adapter.setData(mList);
-                            refreshLayout.setRefreshing(false);
+                            view.onSetAdapter(mList);
+                            view.onHideLoading();
                         } else {
 
                         }
@@ -184,6 +150,8 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
+                        view.onHideLoading();
+                        view.onShowNetError();
                         ToastUtil.toast(throwable.getMessage());
                     }
                 });
@@ -191,15 +159,5 @@ public class TouTiaoNewsTabFragment extends LazyLoadFragment implements SwipeRef
 
     public String getCurrentTimeStamp() {
         return String.valueOf(System.currentTimeMillis() / 1000);
-    }
-
-    @Override
-    public void onRefresh() {
-        int firstVisibleItemPosition = layoutManager.findFirstVisibleItemPosition();
-        if (firstVisibleItemPosition == 0) {
-            mList.clear();
-            refreshLayout.setRefreshing(true);
-            getNewsData();
-        }
     }
 }

@@ -8,8 +8,18 @@ import com.component.fx.plugin_base.utils.LogUtils;
 
 public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollListener {
 
-    private int itemCount;
     private int lastItemCount;
+    private int mPreLoadNumber;
+
+
+    public OnRecycleViewScrollListener() {
+        this(0);
+    }
+
+
+    public OnRecycleViewScrollListener(int preLoadNumber) {
+        this.mPreLoadNumber = preLoadNumber;
+    }
 
     public abstract void onLoadMore();
 
@@ -18,10 +28,10 @@ public abstract class OnRecycleViewScrollListener extends RecyclerView.OnScrollL
     public void onScrolled(@NonNull RecyclerView recyclerView, int dx, int dy) {
         if (recyclerView.getLayoutManager() instanceof LinearLayoutManager) {
             LinearLayoutManager layoutManager = (LinearLayoutManager) recyclerView.getLayoutManager();
-            itemCount = layoutManager.getItemCount();
-            LogUtils.d("fengxing", "onScrolled: "+itemCount);
+            int itemCount = layoutManager.getItemCount();
+            LogUtils.d("fengxing", "onScrolled: " + itemCount);
             int lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition();
-            if (lastItemCount != itemCount && lastVisibleItemPosition == itemCount - 1) {
+            if (lastItemCount != itemCount && lastVisibleItemPosition == itemCount - 1 && itemCount > mPreLoadNumber) {
                 lastItemCount = itemCount;
                 onLoadMore();
             }
