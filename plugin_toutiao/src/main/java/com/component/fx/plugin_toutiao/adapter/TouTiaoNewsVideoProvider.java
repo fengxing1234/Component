@@ -96,4 +96,9 @@ public class TouTiaoNewsVideoProvider extends BaseItemProvider<MultiNewsArticleB
         });
 
     }
+
+    @Override
+    public void onItemClick(BaseHolder holder, MultiNewsArticleBeanData data, int position) {
+        ToastUtil.toast(position+"");
+    }
 }

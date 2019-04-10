@@ -23,17 +23,26 @@ import android.widget.ProgressBar;
 import android.widget.RatingBar;
 import android.widget.TextView;
 
+import java.util.HashSet;
+import java.util.LinkedHashSet;
+
 public class BaseHolder extends RecyclerView.ViewHolder {
 
     private View mItemView;
     private SparseArray<View> mViews;
     private Context mContext;
+    private final LinkedHashSet<Integer> childClickViewIds;
+
+    private final LinkedHashSet<Integer> itemChildLongClickViewIds;
+    private BaseAdapter adapter;
 
     private BaseHolder(@NonNull View itemView) {
         super(itemView);
         mItemView = itemView;
         mContext = itemView.getContext();
         mViews = new SparseArray<>();
+        this.childClickViewIds = new LinkedHashSet<>();
+        this.itemChildLongClickViewIds = new LinkedHashSet<>();
     }
 
     public Context getContext() {
@@ -61,9 +70,52 @@ public class BaseHolder extends RecyclerView.ViewHolder {
     }
 
     public View getItemView() {
-        return itemView;
+        return mItemView;
     }
 
+    public HashSet<Integer> getItemChildLongClickViewIds() {
+        return itemChildLongClickViewIds;
+    }
+
+    public HashSet<Integer> getChildClickViewIds() {
+        return childClickViewIds;
+    }
+
+    public BaseHolder addOnClickListener(@IdRes final int... viewIds) {
+        for (int viewId : viewIds) {
+            childClickViewIds.add(viewId);
+            final View view = getView(viewId);
+            if (view != null) {
+                if (!view.isClickable()) {
+                    view.setClickable(true);
+                }
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        if (adapter.getOnItemChildClickListener() != null) {
+                            adapter.getOnItemChildClickListener().onItemChildClick(adapter, v, getClickPosition());
+                        }
+                    }
+                });
+            }
+        }
+        return this;
+    }
+
+    private int getClickPosition() {
+        if (getLayoutPosition() >= adapter.getHeaderLayoutCount()) {
+            return getLayoutPosition() - adapter.getHeaderLayoutCount();
+        }
+        return 0;
+    }
+
+    public void setAdapter(BaseAdapter adapter) {
+        this.adapter = adapter;
+    }
+
+    public BaseAdapter getAdapter() {
+        return adapter;
+    }
 
     /****以下为辅助方法*****/
 

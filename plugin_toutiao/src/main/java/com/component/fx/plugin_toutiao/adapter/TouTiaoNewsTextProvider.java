@@ -82,4 +82,9 @@ public class TouTiaoNewsTextProvider extends BaseItemProvider<MultiNewsArticleBe
 
 
     }
+
+    @Override
+    public void onItemClick(BaseHolder holder, MultiNewsArticleBeanData data, int position) {
+        ToastUtil.toast(position+"");
+    }
 }

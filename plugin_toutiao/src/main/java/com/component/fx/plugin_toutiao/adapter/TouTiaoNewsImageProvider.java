@@ -16,7 +16,7 @@ import com.component.fx.plugin_base.utils.ToastUtil;
 import com.component.fx.plugin_toutiao.R;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBeanData;
 
-public class TouTiaoNewsImageProvider extends BaseItemProvider<MultiNewsArticleBeanData>{
+public class TouTiaoNewsImageProvider extends BaseItemProvider<MultiNewsArticleBeanData> {
 
     @Override
     public int viewType() {
@@ -83,5 +83,10 @@ public class TouTiaoNewsImageProvider extends BaseItemProvider<MultiNewsArticleB
             }
         });
 
+    }
+
+    @Override
+    public void onItemClick(BaseHolder holder, MultiNewsArticleBeanData data, int position) {
+        ToastUtil.toast(position+"");
     }
 }
