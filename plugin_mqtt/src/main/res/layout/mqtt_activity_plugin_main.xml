@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MQTTPluginMainActivity">
+
+    <TextView
+        android:id="@+id/mqtt_tv_result"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="10dp" />
+
+
+    <Button
+        android:id="@+id/mqtt_btn_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="连接" />
+
+    <Button
+        android:id="@+id/mqtt_btn_subscribe"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="订阅" />
+
+    <Button
+        android:id="@+id/mqtt_btn_publish"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="发布" />
+
+    <Button
+        android:id="@+id/mqtt_btn_is_connect"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="是否连接连接" />
+
+
+</LinearLayout>
