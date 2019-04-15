@@ -38,7 +38,7 @@ public class MqttPushService extends Service {
     // TODO: 2019/4/13 未测试
 
 
-    
+
     private static final String TAG = "MqttPushService";
     private long mStartTime;
     private ConnectionLog mLog;
