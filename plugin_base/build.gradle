@@ -103,4 +103,7 @@ dependencies {
 
     // LeakCanary
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+
+    //通用的广告栏控件 不太好用 对 指示器 不友好
+    api 'com.bigkoo:ConvenientBanner:2.1.4'
 }

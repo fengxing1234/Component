@@ -1,0 +1,45 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+    <dimen name="nav_header_vertical_spacing">8dp</dimen>
+    <dimen name="nav_header_height">176dp</dimen>
+    <dimen name="fab_margin">16dp</dimen>
+
+    <!--
+
+    顶部状态栏高度：24dp
+    Appbar最小高度：56dp
+    底部导航栏高度：48dp
+    悬浮按钮尺寸：56x56dp/40x40dp
+    用户头像尺寸：64x64dp/40x40dp
+    小图标点击区域：48x48dp
+    侧边抽屉到屏幕右边的距离：56dp
+    卡片间距：8dp
+    分隔线上下留白：8dp
+    大多元素的留白距离：16dp
+    屏幕左右对齐基线：16dp
+    文字左侧对齐基线：72dp
+
+    -->
+    <!--小字提示-->
+    <dimen name="test_size_small_character">12sp</dimen>
+    <!--正文/按钮文字-->
+    <dimen name="test_size_normal">14sp</dimen>
+    <!--16sp 小标题-->
+    <dimen name="test_size_small_title">16sp</dimen>
+    <!--Appbar文字-->
+    <dimen name="test_size_app_bar">20sp</dimen>
+    <!--大标题-->
+    <dimen name="test_size_title">24sp</dimen>
+    <!--超大号文字-->
+    <dimen name="test_size_large_character">34sp</dimen>
+    <!--超大号文字-->
+    <dimen name="test_size_large_character_45">45sp</dimen>
+    <!--超大号文字-->
+    <dimen name="test_size_large_character_56">56sp</dimen>
+    <!--超大号文字-->
+    <dimen name="test_size_large_character_112">112sp</dimen>
+
+
+</resources>

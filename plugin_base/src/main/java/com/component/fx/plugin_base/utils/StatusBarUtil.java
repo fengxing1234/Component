@@ -34,6 +34,22 @@ public class StatusBarUtil {
     }
 
     /**
+     * 图片占用状态栏效果
+     * xml 布局中 android:fitsSystemWindows="true" 删除掉
+     *
+     * @param activity
+     */
+    public static void imageFullScreen(Activity activity) {
+        if (Build.VERSION.SDK_INT >= 21) {
+            View decorView = activity.getWindow().getDecorView();
+            int option = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                    | View.SYSTEM_UI_FLAG_LAYOUT_STABLE;
+            decorView.setSystemUiVisibility(option);
+            activity.getWindow().setStatusBarColor(Color.TRANSPARENT);
+        }
+    }
+
+    /**
      * 4.4版本 半透明
      * 针对 4.4版本 状态栏半透明
      */
@@ -221,7 +237,9 @@ public class StatusBarUtil {
      */
     public static void statusBarTextColorBlack(Window window) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            window.getDecorView().setSystemUiVisibility(View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
+            View decorView = window.getDecorView();
+            int flag = decorView.getSystemUiVisibility();
+            decorView.setSystemUiVisibility(flag | View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR);
         }
     }
 }
