@@ -20,14 +20,14 @@ public class TestPluginMainActivity extends AppCompatActivity implements View.On
         if (!TextUtils.isEmpty(action)) {
             Toast.makeText(this, action, Toast.LENGTH_LONG).show();
         }
-
+        startActivity(new Intent(this, TextRxJavaActivity.class));
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.test_btn_notify:
-                startActivity(new Intent(this, TestNotificationActivity.class));
+                startActivity(new Intent(this, TestProgressActivity.class));
                 break;
         }
     }

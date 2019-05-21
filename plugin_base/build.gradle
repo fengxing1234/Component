@@ -106,4 +106,9 @@ dependencies {
 
     //通用的广告栏控件 不太好用 对 指示器 不友好
     api 'com.bigkoo:ConvenientBanner:2.1.4'
+
+    api 'com.evernote:android-job:1.2.6'
+
+    api "android.arch.work:work-runtime:1.0.1"
+
 }

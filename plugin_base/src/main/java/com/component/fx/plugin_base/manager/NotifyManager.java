@@ -21,6 +21,7 @@ public class NotifyManager {
 
     public static final String CHAT_ChANNEL_ID = "chat_channel_id";
     public static final String NEWS_ChANNEL_ID = "news_channel_id";
+    public static final String TEST_CHANNEL_ID = "test_channel_id";
 
     private static final String CHECK_OP_NO_THROW = "checkOpNoThrow";
     private static final String OP_POST_NOTIFICATION = "OP_POST_NOTIFICATION";
@@ -41,6 +42,10 @@ public class NotifyManager {
         channelName = "新闻";
         importance = NotificationManager.IMPORTANCE_DEFAULT;
         setChannel(NEWS_ChANNEL_ID, channelName, importance);
+
+        channelName = "测试";
+        importance = NotificationManager.IMPORTANCE_DEFAULT;
+        setChannel(TEST_CHANNEL_ID, channelName, importance);
     }
 
 

@@ -43,7 +43,7 @@ public class MDUIMainActivity extends AppCompatActivity
                         .setAction("Action", new View.OnClickListener() {
                             @Override
                             public void onClick(View v) {
-                                startActivity(new Intent(MDUIMainActivity.this, MDUIBannerActivity.class));
+                                startActivity(new Intent(MDUIMainActivity.this, MDUIScrollingActivity.class));
                             }
                         }).show();
             }

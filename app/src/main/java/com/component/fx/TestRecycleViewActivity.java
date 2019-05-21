@@ -11,9 +11,12 @@ import android.view.animation.AnimationUtils;
 import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
+import com.component.fx.plugin_base.polling.PollingBroadcastService;
+import com.component.fx.plugin_base.polling.PollingService;
 import com.component.fx.plugin_base.base.BaseActivity;
 import com.component.fx.plugin_base.base.recycle.BaseAdapter;
 import com.component.fx.plugin_base.base.recycle.BaseHolder;
+import com.component.fx.plugin_base.polling.RxjavaPolling;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -30,6 +33,10 @@ public class TestRecycleViewActivity extends BaseActivity {
         findViewById(R.id.test_btn_add).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                PollingService.startAlarmPolling(TestRecycleViewActivity.this);
+                RxjavaPolling.taskPolling();
+                PollingBroadcastService.startService(TestRecycleViewActivity.this);
                 adapter.addData(1, "1");
             }
         });

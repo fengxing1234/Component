@@ -40,6 +40,8 @@
     <dimen name="test_size_large_character_56">56sp</dimen>
     <!--超大号文字-->
     <dimen name="test_size_large_character_112">112sp</dimen>
+    <dimen name="app_bar_height">180dp</dimen>
+    <dimen name="text_margin">16dp</dimen>
 
 
 </resources>

@@ -38,6 +38,8 @@
         <activity android:name=".TestWindowNotifyActivity" />
 
         <service android:name="TestWindowService" />
+        <activity android:name=".TestProgressActivity"/>
+        <activity android:name=".TextRxJavaActivity"/>
     </application>
 
 </manifest>

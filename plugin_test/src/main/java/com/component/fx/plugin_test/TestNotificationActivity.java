@@ -439,7 +439,7 @@ public class TestNotificationActivity extends AppCompatActivity {
          FLAG_ONE_SHOT 表示返回的PendingIntent仅能执行一次，执行完后自动取消
          FLAG_NO_CREATE 表示如果描述的PendingIntent不存在，并不创建相应的PendingIntent，而是返回NULL
          FLAG_CANCEL_CURRENT 表示相应的PendingIntent已经存在，则取消前者，然后创建新的PendingIntent， 这个有利于数据保持为最新的，可以用于即时通信的通信场景
-         FLAG_UPDATE_CURRENT 表示更新的PendingIntent
+         FLAG_UPDATE_CURRENT 如果要创建的PendingIntent已经存在了，那么在保留原先PendingIntent的同时，将原先PendingIntent封装的Intent中的extra部分替换为现在新创建的PendingIntent的intent中extra的内容
          */
         return pendingIntent;
     }

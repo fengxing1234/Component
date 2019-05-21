@@ -5,6 +5,8 @@ import android.content.Context;
 
 import com.component.fx.plugin_base.BuildConfig;
 import com.component.fx.plugin_base.manager.NotifyManager;
+import com.component.fx.plugin_base.polling.DemoJobCreator;
+import com.evernote.android.job.JobManager;
 import com.facebook.stetho.Stetho;
 import com.squareup.leakcanary.LeakCanary;
 
@@ -44,6 +46,9 @@ public abstract class BaseApplication extends Application {
         }
         LeakCanary.install(this);
         NotifyManager.createChannel();
+
+        JobManager.create(this).addJobCreator(new DemoJobCreator());
+
     }
 
 

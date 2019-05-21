@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <declare-styleable name="Test_CircleProgress">
+        <attr name="test_cpRadius" format="dimension" />
+        <attr name="test_cpColor" format="color" />
+        <attr name="test_margin" format="dimension"/>
+    </declare-styleable>
+</resources>
