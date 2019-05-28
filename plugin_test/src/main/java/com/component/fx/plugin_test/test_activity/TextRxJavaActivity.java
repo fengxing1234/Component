@@ -1,10 +1,12 @@
-package com.component.fx.plugin_test;
+package com.component.fx.plugin_test.test_activity;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+
+import com.component.fx.plugin_test.R;
 
 import org.reactivestreams.Publisher;
 import org.reactivestreams.Subscriber;

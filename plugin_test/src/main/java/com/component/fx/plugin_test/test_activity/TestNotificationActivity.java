@@ -1,4 +1,4 @@
-package com.component.fx.plugin_test;
+package com.component.fx.plugin_test.test_activity;
 
 import android.annotation.SuppressLint;
 import android.app.AlarmManager;
@@ -22,6 +22,7 @@ import android.widget.RemoteViews;
 
 import com.component.fx.plugin_base.manager.IntentManager;
 import com.component.fx.plugin_base.manager.NotifyManager;
+import com.component.fx.plugin_test.R;
 
 
 /**

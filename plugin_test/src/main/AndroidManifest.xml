@@ -18,7 +18,7 @@
         android:roundIcon="@mipmap/test_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/test_AppTheme">
-        <activity android:name=".TestPluginMainActivity">
+        <activity android:name=".test_activity.TestPluginMainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -26,20 +26,22 @@
             </intent-filter>
         </activity>
 
-        <activity android:name=".TestNotificationActivity" />
+        <activity android:name=".test_activity.TestNotificationActivity" />
 
         <activity
-            android:name=".TestReceiveActivity"
-            android:parentActivityName=".TestPluginMainActivity">
+            android:name=".test_activity.TestReceiveActivity"
+            android:parentActivityName=".test_activity.TestPluginMainActivity">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value=".TestPluginMainActivity" />
+                android:value=".test_activity.TestPluginMainActivity" />
         </activity>
-        <activity android:name=".TestWindowNotifyActivity" />
+        <activity android:name=".test_activity.TestWindowNotifyActivity" />
 
         <service android:name="TestWindowService" />
-        <activity android:name=".TestProgressActivity"/>
-        <activity android:name=".TextRxJavaActivity"/>
+        <activity android:name=".test_activity.TestProgressActivity"/>
+        <activity android:name=".test_activity.TextRxJavaActivity"/>
+        <activity android:name=".test_activity.TestImageViewerActivity"/>
+        <activity android:name=".test_activity.TestRecycleViewActivity" />
     </application>
 
 </manifest>

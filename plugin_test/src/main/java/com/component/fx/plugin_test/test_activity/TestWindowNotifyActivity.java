@@ -1,4 +1,4 @@
-package com.component.fx.plugin_test;
+package com.component.fx.plugin_test.test_activity;
 
 import android.content.Context;
 import android.graphics.PixelFormat;
@@ -10,6 +10,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
+
+import com.component.fx.plugin_test.R;
 
 public class TestWindowNotifyActivity extends AppCompatActivity {
 

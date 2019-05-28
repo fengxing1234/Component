@@ -1,4 +1,4 @@
-package com.component.fx.plugin_test;
+package com.component.fx.plugin_test.test_activity;
 
 import android.graphics.drawable.Drawable;
 import android.os.Bundle;
@@ -11,6 +11,7 @@ import android.widget.ImageView;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 
+import com.component.fx.plugin_test.R;
 import com.component.fx.plugin_test.progress.CircleProgress;
 import com.component.fx.plugin_test.progress.SquareProgress;
 import com.component.fx.plugin_test.progress.WaveDrawable;

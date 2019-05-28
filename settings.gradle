@@ -1,1 +1,1 @@
-include ':app', ':plugin_app', ':plugin_base', ':plugin_login', ':plugin_component', ':plugin_share', ':plugin_news', ':plugin_toutiao', ':plugin_test', ':plugin_mqtt', ':md_ui', ':minemap'
+include ':app', ':plugin_app', ':plugin_base', ':plugin_login', ':plugin_component', ':plugin_share', ':plugin_news', ':plugin_toutiao', ':plugin_test', ':plugin_mqtt', ':md_ui', ':minemap', ':image_viewer'

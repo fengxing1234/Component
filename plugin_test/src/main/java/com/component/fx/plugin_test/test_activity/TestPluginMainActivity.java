@@ -1,4 +1,4 @@
-package com.component.fx.plugin_test;
+package com.component.fx.plugin_test.test_activity;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -6,6 +6,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.Toast;
+
+import com.component.fx.plugin_test.R;
 
 public class TestPluginMainActivity extends AppCompatActivity implements View.OnClickListener {
 
@@ -20,7 +22,7 @@ public class TestPluginMainActivity extends AppCompatActivity implements View.On
         if (!TextUtils.isEmpty(action)) {
             Toast.makeText(this, action, Toast.LENGTH_LONG).show();
         }
-        startActivity(new Intent(this, TextRxJavaActivity.class));
+        startActivity(new Intent(this, TestRecycleViewActivity.class));
     }
 
     @Override
