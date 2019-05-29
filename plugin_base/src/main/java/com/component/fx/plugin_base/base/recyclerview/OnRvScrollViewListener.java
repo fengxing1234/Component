@@ -1,4 +1,4 @@
-package com.component.fx.plugin_base.base.recycle;
+package com.component.fx.plugin_base.base.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.support.v7.widget.LinearLayoutManager;

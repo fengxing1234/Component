@@ -1,4 +1,4 @@
-package com.component.fx.plugin_base.base.recycle;
+package com.component.fx.plugin_base.base.recyclerview;
 
 import android.animation.Animator;
 import android.content.Context;
@@ -13,13 +13,13 @@ import android.view.animation.Interpolator;
 import android.view.animation.LinearInterpolator;
 import android.widget.LinearLayout;
 
-import com.component.fx.plugin_base.base.recycle.animator.AlphaInAnimation;
-import com.component.fx.plugin_base.base.recycle.animator.BaseAnimation;
-import com.component.fx.plugin_base.base.recycle.animator.ScaleInAnimation;
-import com.component.fx.plugin_base.base.recycle.animator.SlideInBottomAnimation;
-import com.component.fx.plugin_base.base.recycle.animator.SlideInLeftAnimation;
-import com.component.fx.plugin_base.base.recycle.animator.SlideInRightAnimation;
-import com.component.fx.plugin_base.base.recycle.provider.MultiTypeDelegate;
+import com.component.fx.plugin_base.base.recyclerview.animator.AlphaInAnimation;
+import com.component.fx.plugin_base.base.recyclerview.animator.BaseAnimation;
+import com.component.fx.plugin_base.base.recyclerview.animator.ScaleInAnimation;
+import com.component.fx.plugin_base.base.recyclerview.animator.SlideInBottomAnimation;
+import com.component.fx.plugin_base.base.recyclerview.animator.SlideInLeftAnimation;
+import com.component.fx.plugin_base.base.recyclerview.animator.SlideInRightAnimation;
+import com.component.fx.plugin_base.base.recyclerview.provider.MultiTypeDelegate;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
@@ -31,8 +31,10 @@ import static android.view.ViewGroup.LayoutParams.WRAP_CONTENT;
 
 public abstract class BaseAdapter<T> extends RecyclerView.Adapter<BaseHolder> {
 
-    private static final int HEADER_VIEW_TYPE = 0x00001111;
-    private static final int FOOTER_VIEW_TYPE = 0x00002222;
+    // TODO: 2019-05-28 添加类型 别忘了其他地方做判断
+    public static final int HEADER_VIEW_TYPE = 0x00001111;
+    public static final int FOOTER_VIEW_TYPE = 0x00002222;
+
     private static final String TAG = "BaseAdapter";
 
     protected List<T> mList = new ArrayList<>();

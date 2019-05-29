@@ -1,4 +1,4 @@
-package com.component.fx.plugin_base.base.recycle;
+package com.component.fx.plugin_base.base.recyclerview;
 
 import android.annotation.SuppressLint;
 import android.content.Context;

@@ -1,12 +1,12 @@
-package com.component.fx.plugin_base.base.recycle;
+package com.component.fx.plugin_base.base.recyclerview;
 
 import android.support.annotation.NonNull;
 import android.util.SparseArray;
 import android.view.View;
 
-import com.component.fx.plugin_base.base.recycle.provider.BaseItemProvider;
-import com.component.fx.plugin_base.base.recycle.provider.MultiTypeDelegate;
-import com.component.fx.plugin_base.base.recycle.provider.ProviderDelegate;
+import com.component.fx.plugin_base.base.recyclerview.provider.BaseItemProvider;
+import com.component.fx.plugin_base.base.recyclerview.provider.MultiTypeDelegate;
+import com.component.fx.plugin_base.base.recyclerview.provider.ProviderDelegate;
 
 public abstract class MultipleItemRvAdapter<T> extends BaseAdapter<T> {
 

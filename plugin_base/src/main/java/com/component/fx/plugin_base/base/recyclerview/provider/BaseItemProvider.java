@@ -1,6 +1,6 @@
-package com.component.fx.plugin_base.base.recycle.provider;
+package com.component.fx.plugin_base.base.recyclerview.provider;
 
-import com.component.fx.plugin_base.base.recycle.BaseHolder;
+import com.component.fx.plugin_base.base.recyclerview.BaseHolder;
 
 public abstract class BaseItemProvider<T> {
 

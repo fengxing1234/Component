@@ -1,4 +1,4 @@
-package com.component.fx.plugin_base.base.recycle.provider;
+package com.component.fx.plugin_base.base.recyclerview.provider;
 
 import android.util.SparseArray;
 

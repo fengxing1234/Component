@@ -15,12 +15,11 @@ import android.view.animation.LayoutAnimationController;
 import android.widget.TextView;
 
 import com.component.fx.plugin_base.base.BaseActivity;
-import com.component.fx.plugin_base.base.recycle.BaseAdapter;
-import com.component.fx.plugin_base.base.recycle.BaseHolder;
+import com.component.fx.plugin_base.base.recyclerview.BaseAdapter;
+import com.component.fx.plugin_base.base.recyclerview.BaseHolder;
 import com.component.fx.plugin_test.R;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 public class TestRecycleViewActivity extends BaseActivity {
@@ -86,36 +85,101 @@ public class TestRecycleViewActivity extends BaseActivity {
 
         //runLayoutAnimation(recyclerView);
 
-        itemTouchHelper();
+        //itemTouchHelper();
+        //BaseItemDraggable();
+    }
+
+    private void BaseItemDraggable() {
+        //recyclerView.getRecycledViewPool().setMaxRecycledViews(0,0);
+//        final Paint paint = new Paint();
+//        paint.setAntiAlias(true);
+//        paint.setTextSize(20);
+//        paint.setColor(Color.BLACK);
+//
+//
+//        ItemDragAndSwipeCallback callback = new ItemDragAndSwipeCallback(adapter);
+//        ItemTouchHelper itemTouchHelper = new ItemTouchHelper(callback);
+//        itemTouchHelper.attachToRecyclerView(recyclerView);
+//
+//        callback.setDragMoveFlags(ItemTouchHelper.LEFT | ItemTouchHelper.RIGHT | ItemTouchHelper.UP | ItemTouchHelper.DOWN);
+//        callback.setSwipeMoveFlags(ItemTouchHelper.START | ItemTouchHelper.END);
+//
+//        adapter.enableSwipeItem();
+//        adapter.setOnItemSwipeListener(new OnItemSwipeListener() {
+//            @Override
+//            public void onItemSwipeStart(RecyclerView.ViewHolder viewHolder, int pos) {
+//                Log.d(TAG, "onItemSwipeStart: ");
+//                BaseHolder holder = ((BaseHolder) viewHolder);
+//                holder.setTextColor(R.id.tv_num, Color.WHITE);
+//            }
+//
+//            @Override
+//            public void clearView(RecyclerView.ViewHolder viewHolder, int pos) {
+//                Log.d(TAG, "clearView: ");
+//                BaseHolder holder = ((BaseHolder) viewHolder);
+//            }
+//
+//            @Override
+//            public void onItemSwiped(RecyclerView.ViewHolder viewHolder, int pos) {
+//                Log.d(TAG, "onItemSwiped: ");
+//            }
+//
+//            @Override
+//            public void onItemSwipeMoving(Canvas canvas, RecyclerView.ViewHolder viewHolder, float dX, float dY, boolean isCurrentlyActive) {
+//                Log.d(TAG, "onItemSwipeMoving: ");
+//                canvas.drawColor(ContextCompat.getColor(TestRecycleViewActivity.this, R.color.color_light_blue));
+//                canvas.drawText("Just some text", 0, 40, paint);
+//            }
+//        });
+//
+//        adapter.enableDragItem(itemTouchHelper);
+//        adapter.setOnItemDragListener(new OnItemDragListener() {
+//            @Override
+//            public void onItemDragStart(RecyclerView.ViewHolder viewHolder, int pos) {
+//                Log.d(TAG, "onItemDragStart: ");
+//                BaseHolder holder = ((BaseHolder) viewHolder);
+//                holder.setTextColor(R.id.tv_num, Color.BLUE);
+//            }
+//
+//            @Override
+//            public void onItemDragMoving(RecyclerView.ViewHolder source, int from, RecyclerView.ViewHolder target, int to) {
+//                Log.d(TAG, "onItemDragMoving: ");
+//            }
+//
+//            @Override
+//            public void onItemDragEnd(RecyclerView.ViewHolder viewHolder, int pos) {
+//                Log.d(TAG, "onItemDragEnd: ");
+//                BaseHolder holder = ((BaseHolder) viewHolder);
+//                holder.setTextColor(R.id.tv_num, Color.GREEN);
+//            }
+//        });
+
+
     }
 
     private void itemTouchHelper() {
-        ItemTouchHelper.SimpleCallback simpleCallback = new ItemTouchHelper.SimpleCallback(ItemTouchHelper.UP | ItemTouchHelper.DOWN, ItemTouchHelper.RIGHT) {
+        ItemTouchHelper.Callback simpleCallback = new ItemTouchHelper.Callback() {
+
 
             @Override
-            public boolean onMove(@NonNull RecyclerView recyclerView, @NonNull RecyclerView.ViewHolder viewHolder, @NonNull RecyclerView.ViewHolder viewHolder1) {
-                int fromPosition = viewHolder.getAdapterPosition();
-                int toPosition = viewHolder1.getAdapterPosition();
-                if (fromPosition < toPosition) {
-                    for (int i = fromPosition; i < toPosition; i++) {
-                        Collections.swap(data, i, i + 1);
-                    }
-                } else {
-                    for (int i = fromPosition; i > toPosition; i--) {
-                        Collections.swap(data, i, i - 1);
-                    }
-                }
-
-                adapter.notifyItemMoved(fromPosition, toPosition);
-                //返回true表示执行拖动
+            public boolean isItemViewSwipeEnabled() {
                 return true;
             }
 
             @Override
             public void onSwiped(@NonNull RecyclerView.ViewHolder viewHolder, int i) {
-                int position = viewHolder.getAdapterPosition();
-                data.remove(position);
-                adapter.notifyItemRemoved(position);
+
+            }
+
+
+            @Override
+            public int getMovementFlags(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                return makeMovementFlags(0, ItemTouchHelper.START);
+            }
+
+            @Override
+            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
+                return false;
             }
 
             @Override
@@ -130,6 +194,11 @@ public class TestRecycleViewActivity extends BaseActivity {
                 }
             }
 
+            @Override
+            public void clearView(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder) {
+                super.clearView(recyclerView, viewHolder);
+
+            }
         };
         ItemTouchHelper itemTouchHelper = new ItemTouchHelper(simpleCallback);
         itemTouchHelper.attachToRecyclerView(recyclerView);
@@ -157,12 +226,13 @@ public class TestRecycleViewActivity extends BaseActivity {
 
         @Override
         public int getLayoutRes() {
-            return R.layout.test_recycle_item;
+            return R.layout.test_recycler_item_root;
         }
 
         @Override
         protected void convert(@NonNull BaseHolder baseHolder, String data, int position) {
-            ((TextView) baseHolder.getView(R.id.tv_num)).setText(data);
+            TextView view = (TextView) baseHolder.getView(R.id.tv_num);
+            view.setText(data);
         }
     }
 }

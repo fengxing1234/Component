@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.component.fx.plugin_base.base.recycle.BaseHolder;
-import com.component.fx.plugin_base.base.recycle.provider.BaseItemProvider;
+import com.component.fx.plugin_base.base.recyclerview.BaseHolder;
+import com.component.fx.plugin_base.base.recyclerview.provider.BaseItemProvider;
 import com.component.fx.plugin_base.utils.GlideUtils;
 import com.component.fx.plugin_base.utils.TimeUtils;
 import com.component.fx.plugin_base.utils.ToastUtil;

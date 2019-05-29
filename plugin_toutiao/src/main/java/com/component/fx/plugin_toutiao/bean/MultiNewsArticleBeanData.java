@@ -1,6 +1,6 @@
 package com.component.fx.plugin_toutiao.bean;
 
-import com.component.fx.plugin_base.base.recycle.MultiItemEntity;
+import com.component.fx.plugin_base.base.recyclerview.MultiItemEntity;
 import com.google.gson.annotations.SerializedName;
 
 import java.util.List;

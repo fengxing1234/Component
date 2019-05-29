@@ -1,7 +1,7 @@
 package com.component.fx.plugin_toutiao.adapter;
 
-import com.component.fx.plugin_base.base.recycle.MultipleItemRvAdapter;
-import com.component.fx.plugin_base.base.recycle.provider.ProviderDelegate;
+import com.component.fx.plugin_base.base.recyclerview.MultipleItemRvAdapter;
+import com.component.fx.plugin_base.base.recyclerview.provider.ProviderDelegate;
 import com.component.fx.plugin_toutiao.bean.MultiNewsArticleBeanData;
 
 public class TouTiaoMultiNewRvAdapter extends MultipleItemRvAdapter<MultiNewsArticleBeanData> {
