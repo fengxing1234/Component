@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <Button
+        android:id="@+id/test_view"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:background="@color/base_colorPrimary" />
+
+    <Button
+        android:id="@+id/test_view2"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_gravity="right"
+        android:background="@color/base_colorPrimary" />
+
+    <com.component.fx.plugin_test.ui.TestView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center_horizontal" />
+
+    <com.component.fx.plugin_test.ui.PieChartView
+        android:id="@+id/pie_chart_view"
+        android:layout_width="300dp"
+        android:layout_height="400dp"
+        android:layout_gravity="center"
+        android:background="#eeeeee" />
+
+</android.support.design.widget.CoordinatorLayout>

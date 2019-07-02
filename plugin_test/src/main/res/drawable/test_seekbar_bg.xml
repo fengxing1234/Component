@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!--上面就是设置三层颜色的，-->
+    <!--其中background是底色，-->
+    <!--secondaryProgress是缓冲的颜色，-->
+    <!--progress是当前进度的颜色-->
+
+    <item android:id="@android:id/background">
+        <shape>
+            <solid android:color="#ff51495e" />
+        </shape>
+    </item>
+
+    <item android:id="@android:id/secondaryProgress">
+        <clip>
+            <shape>
+                <solid android:color="#f9062a" />
+            </shape>
+        </clip>
+    </item>
+
+    <item android:id="@android:id/progress">
+        <clip>
+            <shape>
+                <solid android:color="#2db334" />
+            </shape>
+        </clip>
+    </item>
+</layer-list>

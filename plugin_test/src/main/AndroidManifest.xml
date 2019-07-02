@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="com.component.fx.plugin_test">
 
     <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <uses-permission android:name="android.permission.GET_TASKS" />
 
@@ -11,10 +13,11 @@
     <uses-permission android:name="android.permission.VIBRATE" />
 
     <application
+        android:name=".TestNotificationApp"
         android:allowBackup="true"
         android:icon="@mipmap/test_ic_launcher"
-        android:name=".TestNotificationApp"
         android:label="@string/test_app_name"
+        android:networkSecurityConfig="@xml/network_security_config"
         android:roundIcon="@mipmap/test_ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/test_AppTheme">
@@ -38,10 +41,139 @@
         <activity android:name=".test_activity.TestWindowNotifyActivity" />
 
         <service android:name="TestWindowService" />
-        <activity android:name=".test_activity.TestProgressActivity"/>
-        <activity android:name=".test_activity.TextRxJavaActivity"/>
-        <activity android:name=".test_activity.TestImageViewerActivity"/>
+
+        <activity android:name=".test_activity.TestProgressActivity" />
+        <activity android:name=".test_activity.TextRxJavaActivity" />
+        <activity android:name=".test_activity.TestImageViewerActivity" />
         <activity android:name=".test_activity.TestRecycleViewActivity" />
+        <!--<activity android:name=".testCoordinatorLayout.TestLeafLoadingActivity"/>-->
+        <activity android:name=".testCoordinatorLayout.TestCoordinatorActivity" />
+
+
+        <activity android:name=".test_activity.TestSchemeActivity">
+
+            <!--&lt;!&ndash;DEEP LINK scheme: http or https 弹出选择对话框 体验效果不太好 选择 浏览器 还是app 兼容所有版本&ndash;&gt;-->
+            <!--<intent-filter android:autoVerify="true">-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
+
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+
+            <!--<data-->
+            <!--android:host="www.fengxing.com"-->
+            <!--android:scheme="https" />-->
+            <!--</intent-filter>-->
+
+            <!--&lt;!&ndash;&lt;!&ndash;DEEP LINK scheme: custom 需要重定向 兼容所有版本&ndash;&gt;&ndash;&gt;-->
+            <!--<intent-filter>-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
+
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+
+            <!--<data-->
+            <!--android:host="www.fengxing.com"-->
+            <!--android:path="/this/is/test/path"-->
+            <!--android:pathPrefix="/test/path/prefix"-->
+            <!--android:port="1080"-->
+            <!--android:scheme="test" />-->
+            <!--</intent-filter>-->
+
+            <!--APP LINK 兼容>=6.0版本 scheme 必须是http 或者 https的-->
+            <!--android:autoVerify="true" 验证点击的链接和APP是否有关联-->
+            <!--创建服务端文件-->
+            <!--<intent-filter-->
+            <!--android:autoVerify="true">-->
+            <!--<action android:name="android.intent.action.VIEW" />-->
+
+            <!--<category android:name="android.intent.category.DEFAULT" />-->
+            <!--<category android:name="android.intent.category.BROWSABLE" />-->
+
+            <!--<data-->
+            <!--android:host="yecha.claimbox.cn"-->
+            <!--android:scheme="https" />-->
+            <!--<data-->
+            <!--android:host="yecha.claimbox.cn"-->
+            <!--android:scheme="http" />-->
+            <!--</intent-filter>-->
+            <intent-filter android:autoVerify="true">
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="https" />
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="https" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="http" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+                <data
+                    android:host="yecha.claimbox.cn"
+                    android:scheme="http" />
+            </intent-filter>
+        </activity>
+        <activity android:name=".test_activity.RadarViewActivity" />
+
+
+
+        <activity android:name=".test_activity.activityLaunchMode.LaunchModeA" />
+        <activity
+            android:name=".test_activity.activityLaunchMode.LaunchModeB"
+            android:launchMode="singleTop" />
+        <activity
+            android:name=".test_activity.activityLaunchMode.LaunchModeC"
+            android:launchMode="singleTask" />
+        <activity
+            android:name=".test_activity.activityLaunchMode.LaunchModeD"
+            android:launchMode="singleInstance">
+            <intent-filter>
+
+                <action android:name="com.component.fx.plugin_test.action_singleInstance" />
+
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.BROWSABLE" />
+
+            </intent-filter>
+        </activity>
+        <activity android:name=".test_activity.activityLaunchMode.LaunchModeE" />
     </application>
 
 </manifest>

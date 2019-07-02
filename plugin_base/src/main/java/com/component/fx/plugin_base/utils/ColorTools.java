@@ -4,6 +4,8 @@ import android.graphics.Color;
 import android.support.annotation.ColorInt;
 import android.support.v4.graphics.ColorUtils;
 
+import java.util.Random;
+
 public class ColorTools {
 
     /**
@@ -34,5 +36,34 @@ public class ColorTools {
      */
     public static boolean isLightColor(@ColorInt int color) {
         return ColorUtils.calculateLuminance(color) >= 0.5;
+    }
+
+    public static int randomColor() {
+        return randomColor(0);
+    }
+
+    /**
+     * 随机获取一个颜色 自定义透明度
+     *
+     * @param alpha
+     * @return
+     */
+    public static int randomColor(int alpha) {
+        Random rnd = new Random();
+        alpha = Math.min(Math.max(1, alpha), 255);
+        return Color.argb(alpha, rnd.nextInt(256), rnd.nextInt(256), rnd.nextInt(256));
+    }
+
+
+    public static String getRandColorCode() {
+        String r, g, b;
+        Random random = new Random();
+        r = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        g = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        b = Integer.toHexString(random.nextInt(256)).toUpperCase();
+        r = r.length() == 1 ? "0" + r : r;
+        g = g.length() == 1 ? "0" + g : g;
+        b = b.length() == 1 ? "0" + b : b;
+        return "#"+r + g + b;
     }
 }
